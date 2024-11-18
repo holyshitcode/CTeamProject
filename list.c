@@ -39,6 +39,9 @@ void showData() {
                 printf("Integer Data: %d\n", *(int *)temp->data);
             } else if (temp->type == CHAR) {
                 printf("Character Data: %c\n", *(char *)temp->data);
+            }else if (temp->type == STRUCT) {
+                UserInfo temp2 = *(UserInfo *)temp->data;
+                printf("User Info: %s\n",temp2.nickname);
             }
         }
         temp = temp->next;
