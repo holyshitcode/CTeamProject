@@ -101,6 +101,41 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.29/Modules/FindCURL.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.29/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.29/Modules/FindPkgConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.29/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.29/Modules/SelectLibraryConfigurations.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
