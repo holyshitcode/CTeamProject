@@ -3,6 +3,20 @@
 #include <string.h>
 #include "list.h"
 
+char* findPwd(char* name, char* id) {
+    node *temp = head;
+    while (temp != NULL) {
+        if(temp->type == STRUCT) {
+            UserInfo* userInfo = temp->data;
+            if (strcmp(userInfo->id, id) == 0 && strcmp(userInfo->nickname, name) == 0) {
+                return userInfo->passwd;
+            }
+        }
+        temp = temp->next;
+    }
+    return NULL;
+}
+
 
 void userRegister(FILE *fp) {
     char nickname[20];
@@ -59,26 +73,27 @@ void loadAllMembers(FILE *fp) {
 
 int main(void) {
     char tempUserId[30], tempUserPwd[30]; // 메모리를 배열로 할당
-    FILE *fp = fopen("info.txt", "a"); // 파일을 읽기 모드로 엽니다.
-    if (fp == NULL) {
-        printf("Error opening file.\n");
-        return 0;
-    }
-
-    userRegister(fp);
-    fclose(fp);
-    printf("Please enter your id: ");
-    scanf("%s", tempUserId);
-    printf("Please enter your password: ");
-    scanf("%s", tempUserPwd);
-
-    if(userLogin(tempUserId, tempUserPwd)) {
-        printf("Login success");
-    }
+    // FILE *fp = fopen("info.txt", "a"); // 파일을 읽기 모드로 엽니다.
+    // if (fp == NULL) {
+    //     printf("Error opening file.\n");
+    //     return 0;
+    // }
+    //
+    // userRegister(fp);
+    // fclose(fp);
+    // printf("Please enter your id: ");
+    // scanf("%s", tempUserId);
+    // printf("Please enter your password: ");
+    // scanf("%s", tempUserPwd);
+    //
+    // if(userLogin(tempUserId, tempUserPwd)) {
+    //     printf("Login success");
+    // }
     FILE *fp2 = fopen("info.txt", "r"); // 파일을 읽기 모드로 엽니다.
 
     loadAllMembers(fp2);
-
+    char *result = findPwd("gg", "gg");
     fclose(fp2);
+    printf("%s",result);
     return 0;
 }
