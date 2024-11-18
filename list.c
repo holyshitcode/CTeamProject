@@ -31,33 +31,39 @@ void insertData(void *data, dataType type) {
 }
 
 void showData(dataType type) {
-    if (type == ALL) {
-        node *temp = head;
-        while (temp != NULL) {
-            if (temp->data != NULL) {
-                if (temp->type == STRING) {
+    node *temp = head; // 리스트의 시작점
+    while (temp != NULL) {
+        if (temp->data != NULL && temp->type == type) { // 데이터 타입 비교
+            switch (type) {
+                case STRING:
                     printf("String Data: %s\n", (char *)temp->data);
-                } else if (temp->type == INTEGER) {
+                break;
+                case INTEGER:
                     printf("Integer Data: %d\n", *(int *)temp->data);
-                } else if (temp->type == CHAR) {
+                break;
+                case CHAR:
                     printf("Character Data: %c\n", *(char *)temp->data);
-                }else if (temp->type == STRUCT) {
-                    UserInfo temp2 = *(UserInfo *)temp->data;
-                    printf("User Info: %s\n",temp2.nickname);
+                break;
+                case STRUCT: {
+                    UserInfo *userData = (UserInfo *)temp->data;
+                    printf("User Info: %s\n", userData->nickname);
+                    break;
                 }
+                case BOARD: {
+                    Board *boardData = (Board *)temp->data;
+                    printf("Writer = %s\n", boardData->writer);
+                    printf("Contents = %s\n", boardData->contents ? boardData->contents : "(null)");
+                    printf("Likes = %d\n", boardData->likeCount);
+                    printf("BoardHits = %d\n", boardData->boardHit);
+                    printf("Comments = %s\n", boardData->comments ? boardData->comments : "(null)");
+                    break;
+                }
+                default:
+                    printf("Unknown Data Type.\n");
+                break;
             }
-            temp = temp->next;
         }
-    } else if (type == STRUCT) {
-        UserInfo temp = *(UserInfo *)head;
-        printf("User Info: %s\n",temp.nickname);
-    }else if (type == BOARD) {
-        Board temp = *(Board *)head->data;
-        printf("Writer = %s",temp.writer);
-        printf("Contents = %s\n",temp.contents);
-        printf("Likes = %d",temp.likeCount);
-        printf("BoardHits = %d",temp.boardHit);
-        printf("Comments = %s",temp.comments);
+        temp = temp->next; // 다음 노드로 이동
     }
 }
 
@@ -131,6 +137,7 @@ int userLogin(const char *id, const char *pwd) {
                 }
             }
         }
+        temp = temp->next;
     }
     return 0;
 }

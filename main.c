@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "board.h"
 #include "list.h"
 
 char* findPwd(char* name, char* id) {
@@ -95,5 +97,11 @@ int main(void) {
     char *result = findPwd("gg", "gg");
     fclose(fp2);
     printf("%s",result);
+
+
+    Board *board = initBoard("gg", "gg");
+    insertBoard(board);
+    showData(BOARD);
+    showData(STRUCT);
     return 0;
 }

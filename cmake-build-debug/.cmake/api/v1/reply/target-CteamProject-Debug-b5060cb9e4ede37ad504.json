@@ -42,7 +42,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk -fcolor-diagnostics"
+					"fragment" : "-g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics"
 				}
 			],
 			"language" : "C",
@@ -77,7 +77,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib/libcurl.tbd",
+				"fragment" : "/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurl.tbd",
 				"role" : "libraries"
 			}
 		],

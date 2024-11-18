@@ -10,22 +10,23 @@
 				{
 					"includeDirectories" : 
 					[
-						"/usr/include",
-						"/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include"
+						"/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include",
+						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include",
+						"/Library/Developer/CommandLineTools/usr/include"
 					],
 					"linkDirectories" : 
 					[
-						"/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib",
-						"/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib/swift"
+						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib",
+						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/swift"
 					],
 					"linkFrameworkDirectories" : 
 					[
-						"/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/System/Library/Frameworks"
+						"/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/System/Library/Frameworks"
 					],
 					"linkLibraries" : []
 				},
 				"path" : "/Library/Developer/CommandLineTools/usr/bin/cc",
-				"version" : "16.0.0.16000026"
+				"version" : "15.0.0.15000309"
 			},
 			"language" : "C",
 			"sourceFileExtensions" : 
