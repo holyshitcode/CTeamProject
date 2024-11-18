@@ -55,6 +55,9 @@ void showData(enum dataType type) {
         Board temp = *(Board *)head->data;
         printf("Writer = %s",temp.writer);
         printf("Contents = %s\n",temp.contents);
+        printf("Likes = %d",temp.likeCount);
+        printf("BoardHits = %d",temp.boardHit);
+        printf("Comments = %s",temp.comments);
     }
 }
 

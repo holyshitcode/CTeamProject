@@ -12,9 +12,10 @@ typedef struct Board {
 
 Board *initBoard(const char *writer, const char *contents);
 void insertBoard(Board *board);
-void displayBoard(Board *board);
-void deleteBoard(Board *board);
-void displayLikeCount(Board *board);
-void displayComments(Board *board);
+void showBoard();
+void saveBoard(Board *board,FILE *fp);
+void loadBoard(FILE *fp);
+void loadAllBoards(FILE *fp);
+
 
 #endif // LIST_
