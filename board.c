@@ -35,7 +35,7 @@ void saveBoard(Board *board,FILE *fp) {
 void loadBoard(FILE *fp) {
     Board *board = malloc(sizeof(Board));
     if (board != NULL) {
-        fscanf(fp, "%s %s %d %d %s\n",board->writer,board->contents,board->boardHit,board->likeCount,board->comments);
+        fscanf(fp, "%s %s %d %d %s\n",board->writer,board->contents,&board->boardHit,&board->likeCount,board->comments);
         printf("Board Loaded.");
     }
     free(board);

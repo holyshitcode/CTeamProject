@@ -3,6 +3,7 @@
 #include <string.h>
 #include "list.h"
 
+
 void userRegister(FILE *fp) {
     char nickname[20];
     char id[30];
@@ -66,18 +67,18 @@ int main(void) {
 
     userRegister(fp);
     fclose(fp);
-    // printf("Please enter your id: ");
-    // scanf("%s", tempUserId);
-    // printf("Please enter your password: ");
-    // scanf("%s", tempUserPwd);
-    //
-    // if(userLogin(tempUserId, tempUserPwd)) {
-    //     printf("Login success");
-    // }
+    printf("Please enter your id: ");
+    scanf("%s", tempUserId);
+    printf("Please enter your password: ");
+    scanf("%s", tempUserPwd);
+
+    if(userLogin(tempUserId, tempUserPwd)) {
+        printf("Login success");
+    }
     FILE *fp2 = fopen("info.txt", "r"); // 파일을 읽기 모드로 엽니다.
 
     loadAllMembers(fp2);
 
-    fclose(fp);
+    fclose(fp2);
     return 0;
 }

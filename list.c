@@ -30,7 +30,7 @@ void insertData(void *data, dataType type) {
     }
 }
 
-void showData(enum dataType type) {
+void showData(dataType type) {
     if (type == ALL) {
         node *temp = head;
         while (temp != NULL) {

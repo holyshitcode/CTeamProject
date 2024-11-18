@@ -124,6 +124,7 @@ CteamProject: CMakeFiles/CteamProject.dir/main.c.o
 CteamProject: CMakeFiles/CteamProject.dir/list.c.o
 CteamProject: CMakeFiles/CteamProject.dir/board.c.o
 CteamProject: CMakeFiles/CteamProject.dir/build.make
+CteamProject: /Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib/libcurl.tbd
 CteamProject: CMakeFiles/CteamProject.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/uzih05/CLionProjects/CTeamProject/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable CteamProject"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CteamProject.dir/link.txt --verbose=$(VERBOSE)

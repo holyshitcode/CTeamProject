@@ -40,7 +40,7 @@ extern node *tail;
  * 함수 선언
  */
 void insertData(void *data, dataType type);
-void showData();
+void showData(dataType type);
 void deleteData(void *data, dataType type);
 void freeList();
 node *searchData(void *data, dataType type);
