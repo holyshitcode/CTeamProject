@@ -3,6 +3,7 @@
 #include <string.h>
 #include "list.h"
 
+#include "board.h"
 
 
 // 전역 변수 정의
@@ -29,22 +30,31 @@ void insertData(void *data, dataType type) {
     }
 }
 
-void showData() {
-    node *temp = head;
-    while (temp != NULL) {
-        if (temp->data != NULL) {
-            if (temp->type == STRING) {
-                printf("String Data: %s\n", (char *)temp->data);
-            } else if (temp->type == INTEGER) {
-                printf("Integer Data: %d\n", *(int *)temp->data);
-            } else if (temp->type == CHAR) {
-                printf("Character Data: %c\n", *(char *)temp->data);
-            }else if (temp->type == STRUCT) {
-                UserInfo temp2 = *(UserInfo *)temp->data;
-                printf("User Info: %s\n",temp2.nickname);
+void showData(enum dataType type) {
+    if (type == ALL) {
+        node *temp = head;
+        while (temp != NULL) {
+            if (temp->data != NULL) {
+                if (temp->type == STRING) {
+                    printf("String Data: %s\n", (char *)temp->data);
+                } else if (temp->type == INTEGER) {
+                    printf("Integer Data: %d\n", *(int *)temp->data);
+                } else if (temp->type == CHAR) {
+                    printf("Character Data: %c\n", *(char *)temp->data);
+                }else if (temp->type == STRUCT) {
+                    UserInfo temp2 = *(UserInfo *)temp->data;
+                    printf("User Info: %s\n",temp2.nickname);
+                }
             }
+            temp = temp->next;
         }
-        temp = temp->next;
+    } else if (type == STRUCT) {
+        UserInfo temp = *(UserInfo *)head;
+        printf("User Info: %s\n",temp.nickname);
+    }else if (type == BOARD) {
+        Board temp = *(Board *)head->data;
+        printf("Writer = %s",temp.writer);
+        printf("Contents = %s\n",temp.contents);
     }
 }
 
@@ -111,7 +121,7 @@ int userLogin(const char *id, const char *pwd) {
     node *temp = head;
     while (temp != NULL) {
         if(temp->type == STRUCT) {
-            UserInfo *userTemp = (UserInfo *)temp->data;
+            UserInfo *userTemp = temp->data;
             if (strcmp(id, userTemp->id) == 0) {
                 if(strcmp(pwd,userTemp->passwd) == 0){
                     return 1;
@@ -151,3 +161,5 @@ node *searchData(void *data, dataType type) {
 
     return NULL; // 데이터가 리스트에 없으면 NULL 반환
 }
+
+

@@ -10,7 +10,9 @@ typedef enum {
     STRING,
     INTEGER,
     CHAR,
-    STRUCT
+    STRUCT,
+    BOARD,
+    ALL
 } dataType;
 
 /**
@@ -27,6 +29,8 @@ typedef struct UserInfo {
     char id[30];
     char passwd[30];
 }UserInfo;
+
+
 
 // 전역 변수 선언
 extern node *head;

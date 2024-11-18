@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "list.h"
 
 void userRegister(FILE *fp) {
@@ -32,6 +31,7 @@ void userRegister(FILE *fp) {
 }
 
 void loadMember(FILE *fp) {
+    static int counter = 0;
     UserInfo *user = malloc(sizeof(struct UserInfo));
     char nickname[20];
     char id[30];
@@ -45,7 +45,7 @@ void loadMember(FILE *fp) {
     strcpy(user->id, id);
     strcpy(user->passwd, passwd);
     insertData(user, STRUCT);
-    printf("Load Process Done.\n");
+    printf("Load Process Done.(%d)\n",++counter);
 }
 
 void loadAllMembers(FILE *fp) {
@@ -53,19 +53,19 @@ void loadAllMembers(FILE *fp) {
         loadMember(fp);
     }
     printf("Loading Done.\n");
-    showData();
+    showData(STRUCT);
 }
 
 int main(void) {
     char tempUserId[30], tempUserPwd[30]; // 메모리를 배열로 할당
-    FILE *fp = fopen("info.txt", "r"); // 파일을 읽기 모드로 엽니다.
+    FILE *fp = fopen("info.txt", "a"); // 파일을 읽기 모드로 엽니다.
     if (fp == NULL) {
         printf("Error opening file.\n");
-        return 1;
+        return 0;
     }
 
-    // userRegister(fp);  // 이 부분은 주석 처리된 상태로 두었습니다.
-
+    userRegister(fp);
+    fclose(fp);
     // printf("Please enter your id: ");
     // scanf("%s", tempUserId);
     // printf("Please enter your password: ");
@@ -74,8 +74,9 @@ int main(void) {
     // if(userLogin(tempUserId, tempUserPwd)) {
     //     printf("Login success");
     // }
+    FILE *fp2 = fopen("info.txt", "r"); // 파일을 읽기 모드로 엽니다.
 
-    loadAllMembers(fp);
+    loadAllMembers(fp2);
 
     fclose(fp);
     return 0;

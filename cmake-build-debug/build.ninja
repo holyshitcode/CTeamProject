@@ -61,6 +61,12 @@ build CMakeFiles/CteamProject.dir/list.c.o: C_COMPILER__CteamProject_unscanned_D
   OBJECT_DIR = CMakeFiles/CteamProject.dir
   OBJECT_FILE_DIR = CMakeFiles/CteamProject.dir
 
+build CMakeFiles/CteamProject.dir/board.c.o: C_COMPILER__CteamProject_unscanned_Debug /Users/junyeong/maindir/CteamProject/board.c || cmake_object_order_depends_target_CteamProject
+  DEP_FILE = CMakeFiles/CteamProject.dir/board.c.o.d
+  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/CteamProject.dir
+  OBJECT_FILE_DIR = CMakeFiles/CteamProject.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target CteamProject
@@ -69,7 +75,7 @@ build CMakeFiles/CteamProject.dir/list.c.o: C_COMPILER__CteamProject_unscanned_D
 #############################################
 # Link the executable CteamProject
 
-build CteamProject: C_EXECUTABLE_LINKER__CteamProject_Debug CMakeFiles/CteamProject.dir/main.c.o CMakeFiles/CteamProject.dir/list.c.o
+build CteamProject: C_EXECUTABLE_LINKER__CteamProject_Debug CMakeFiles/CteamProject.dir/main.c.o CMakeFiles/CteamProject.dir/list.c.o CMakeFiles/CteamProject.dir/board.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   OBJECT_DIR = CMakeFiles/CteamProject.dir
   POST_BUILD = :
@@ -82,8 +88,9 @@ build CteamProject: C_EXECUTABLE_LINKER__CteamProject_Debug CMakeFiles/CteamProj
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/junyeong/maindir/CteamProject/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
+  COMMAND = cd /Users/junyeong/maindir/CteamProject/cmake-build-debug && /opt/homebrew/bin/ccmake -S/Users/junyeong/maindir/CteamProject -B/Users/junyeong/maindir/CteamProject/cmake-build-debug
+  DESC = Running CMake cache editor...
+  pool = console
   restat = 1
 
 build edit_cache: phony CMakeFiles/edit_cache.util
