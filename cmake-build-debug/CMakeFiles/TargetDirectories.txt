@@ -1,3 +1,3 @@
-/Users/junyeong/maindir/CteamProject/cmake-build-debug/CMakeFiles/CteamProject.dir
-/Users/junyeong/maindir/CteamProject/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/junyeong/maindir/CteamProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/uzih05/CLionProjects/CTeamProject/cmake-build-debug/CMakeFiles/CteamProject.dir
+/Users/uzih05/CLionProjects/CTeamProject/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/uzih05/CLionProjects/CTeamProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
