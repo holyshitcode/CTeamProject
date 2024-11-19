@@ -12,6 +12,7 @@ typedef enum {
     CHAR,
     STRUCT,
     BOARD,
+    MESSAGE,
     ALL
 } dataType;
 

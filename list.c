@@ -4,6 +4,7 @@
 #include "list.h"
 
 #include "board.h"
+#include "message.h"
 
 
 // 전역 변수 정의
@@ -87,6 +88,30 @@ void deleteData(void *data, dataType type) {
                     if (*(char *)temp->data == *(char *)data)
                         toDelete = true;
                     break;
+                case STRUCT: {
+                    UserInfo *userData = temp->data;
+                    UserInfo *compareData = data;
+                    if (strcmp(compareData->nickname, userData->nickname) == 0 && strcmp(compareData->passwd,userData->passwd)==0) {
+                        toDelete = true;
+                    }
+                    break;
+                }
+                case BOARD: {
+                    Board *boardData = temp->data;
+                    Board *compareData = data;
+                    if(strcmp(compareData->writer, boardData->writer)==0) {
+                        toDelete = true;
+                    }
+                    break;
+                }
+                case MESSAGE: {
+                    message *messageData = temp->data;
+                    message *compareData = data;
+                    if(strcmp(messageData->username, compareData->username)==0 && strcmp(messageData->toUsername, compareData->toUsername)==0
+                        && compareData->delivered == true) {
+                        toDelete = true;
+                    }
+                }
                 default: break;
             }
 
