@@ -53,7 +53,7 @@ void printMessage(const char *username) {
         printf("writer=%s\ncontents=%s\n",foundMessage->username,foundMessage->contents);
 
     }
-    printf("Message Reading by name Done\n");
+    printf("Message Reading  Done\n");
 }
 message *searchMessage(const char *username) {
     node *temp = head;

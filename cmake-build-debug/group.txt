@@ -1,0 +1,5 @@
+StudyGroup
+Alice
+1
+Alice alice123 password1
+END_GROUP
