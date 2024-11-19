@@ -7,11 +7,11 @@ typedef struct Message {
     char *contents;
     bool delivered;
 }message;
-message *initMessage(char *username, char *toUsername, char *contents);
-void insertMessage(message message);
-void deleteMessage(message message);
-void printMessage(message message);
-message *searchMessage(char *username);
+message *initMessage(const char *username, const char *toUsername, const char *contents);
+void insertMessage(message *message);
+void deleteMessage(message *message);
+void printMessage(const char *username);
+message *searchMessage(const char *username);
 void checkMessage(const char *toUsername);
 
 #endif

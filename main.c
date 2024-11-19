@@ -4,6 +4,7 @@
 
 #include "board.h"
 #include "list.h"
+#include "message.h"
 
 char* findPwd(char* name, char* id) {
     node *temp = head;
@@ -96,12 +97,17 @@ int main(void) {
     loadAllMembers(fp2);
     char *result = findPwd("gg", "gg");
     fclose(fp2);
-    printf("%s",result);
+    printf("%s\n",result);
 
 
-    Board *board = initBoard("gg", "gg");
-    insertBoard(board);
-    showData(BOARD);
-    showData(STRUCT);
+    // Board *board = initBoard("gg", "gg");
+    // insertBoard(board);
+    // showData(BOARD);
+    // showData(STRUCT);
+
+    message *newMessage = initMessage("junyeong","a","hello");
+    insertMessage(newMessage);
+    printMessage("junyeong");
+
     return 0;
 }
