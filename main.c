@@ -127,10 +127,10 @@ group *createGroup(const char *groupName, const char *username) {
     printf("Group '%s' created with leader '%s'.\n", groupName, username);
     return newGroup;
 }
-group *findGroup(const char *name) {
+group *findGroup(const char *groupName) {
     for (int i = 0; i < 100; i++) {
         if (groupList.group[i].groupName != NULL &&
-            strcmp(groupList.group[i].groupName, name) == 0) {
+            strcmp(groupList.group[i].groupName, groupName) == 0) {
             return &groupList.group[i];
             }
     }
@@ -157,7 +157,7 @@ void joinGroup(const char *groupName, const char *username) {
     group->users[group->userCount++] = user; // 사용자 추가
     printf("User '%s' joined the group '%s'.\n", username, group->groupName);
 }
-void saveGroup(FILE *fp, group *group) {
+void saveGroup(FILE *fp, const group *group) {
     fprintf(fp, "%s\n", group->groupName);    // 그룹 이름
     fprintf(fp, "%s\n", group->leaderName);   // 리더 이름
     fprintf(fp, "%d\n", group->userCount);    // 사용자 수
@@ -273,6 +273,13 @@ int main(void) {
 
     joinGroup("StudyGroup","AliceTest");
     joinGroup("StudyGroup","Bob22Test");
+    fclose(fp3);
+    FILE *fp4 = fopen("group.txt", "a");
+    group *testGroup = findGroup("StudyGroup");
+    saveGroup(fp4, testGroup);
+    free(testGroup);
+    fclose(fp4);
+
 
 
     return 0;
