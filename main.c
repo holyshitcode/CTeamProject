@@ -7,6 +7,8 @@
 #include "message.h"
 #define GROUP_MAX 5
 
+
+
 typedef struct Group {
     char *leaderName;
     char *groupName;
