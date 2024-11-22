@@ -33,10 +33,6 @@ int resetPwd(const char *fileName, const char *name, const char *id, const char 
         printf("'%s'님의 비밀번호가 성공적으로 업데이트 되었습니다.\n", name);
 
         FILE *fp = fopen(fileName, "w");
-        if (!fp) {
-            fprintf(stderr, "Error opening file: %s\n", fileName);
-            return 0;
-        }
 
         node *temp = head;
         while (temp != NULL) {
