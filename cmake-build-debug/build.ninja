@@ -73,6 +73,12 @@ build CMakeFiles/CteamProject.dir/message.c.o: C_COMPILER__CteamProject_unscanne
   OBJECT_DIR = CMakeFiles/CteamProject.dir
   OBJECT_FILE_DIR = CMakeFiles/CteamProject.dir
 
+build CMakeFiles/CteamProject.dir/user.c.o: C_COMPILER__CteamProject_unscanned_Debug /Users/junyeong/maindir/CteamProject/user.c || cmake_object_order_depends_target_CteamProject
+  DEP_FILE = CMakeFiles/CteamProject.dir/user.c.o.d
+  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/CteamProject.dir
+  OBJECT_FILE_DIR = CMakeFiles/CteamProject.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target CteamProject
@@ -81,7 +87,7 @@ build CMakeFiles/CteamProject.dir/message.c.o: C_COMPILER__CteamProject_unscanne
 #############################################
 # Link the executable CteamProject
 
-build CteamProject: C_EXECUTABLE_LINKER__CteamProject_Debug CMakeFiles/CteamProject.dir/main.c.o CMakeFiles/CteamProject.dir/list.c.o CMakeFiles/CteamProject.dir/board.c.o CMakeFiles/CteamProject.dir/message.c.o | /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurl.tbd
+build CteamProject: C_EXECUTABLE_LINKER__CteamProject_Debug CMakeFiles/CteamProject.dir/main.c.o CMakeFiles/CteamProject.dir/list.c.o CMakeFiles/CteamProject.dir/board.c.o CMakeFiles/CteamProject.dir/message.c.o CMakeFiles/CteamProject.dir/user.c.o | /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurl.tbd
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LINK_LIBRARIES = /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurl.tbd
   OBJECT_DIR = CMakeFiles/CteamProject.dir
