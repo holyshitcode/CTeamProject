@@ -21,18 +21,54 @@ typedef struct GroupList {
 }groups;
 
 groups groupList;
-char* findPwd(char* name, char* id) {
-    node *temp = head;
-    while (temp != NULL) {
-        if(temp->type == STRUCT) {
-            UserInfo* userInfo = temp->data;
-            if (strcmp(userInfo->id, id) == 0 && strcmp(userInfo->nickname, name) == 0) {
-                return userInfo->passwd;
-            }
-        }
-        temp = temp->next;
+
+UserInfo *findUser(const char *name);
+
+int resetAndUpdatePwd(const char *fileName, const char *name, const char *id, const char *newPwd) {
+    FILE *fp = fopen(fileName, "r");
+    FILE *tempFp = fopen("temp.txt", "w");
+    if (!fp || !tempFp) {
+        fprintf(stderr, "Error opening file.\n");
+        if (fp) fclose(fp);
+        if (tempFp) fclose(tempFp);
+        return 0;
     }
-    return NULL;
+
+    char fileNickname[20];
+    char fileId[30];
+    char filePasswd[30];
+    int isUpdated = 0;
+
+    // 파일 읽기 및 수정
+    while (fscanf(fp, "%s %s %s", fileNickname, fileId, filePasswd) == 3) {
+        if (strcmp(fileNickname, name) == 0 && strcmp(fileId, id) == 0) {
+            fprintf(tempFp, "%s %s %s\n", fileNickname, fileId, newPwd); // 새 비밀번호 기록
+            isUpdated = 1;
+
+            // 메모리 업데이트
+            UserInfo *user = findUser(name);
+            if (user != NULL && strcmp(user->id, id) == 0) {
+                strcpy(user->passwd, newPwd);
+            }
+        } else {
+            fprintf(tempFp, "%s %s %s\n", fileNickname, fileId, filePasswd);
+        }
+    }
+
+    fclose(fp);
+    fclose(tempFp);
+
+    // 파일 교체
+    remove(fileName);
+    rename("temp.txt", fileName);
+
+    if (isUpdated) {
+        printf("'%s'님의 비밀번호가 성공적으로 업데이트 되었습니다.\n", name);
+        return 1;
+    } else {
+        printf("'%s'님의 id가 '%s'인 사용자를 찾지 못했습니다.\n", name, id);
+        return 0;
+    }
 }
 
 
@@ -66,9 +102,9 @@ void userRegister(FILE *fp) {
 UserInfo *findUser(const char *name) {
     node *temp = head;
     while (temp != NULL) {
-        if(temp->type == STRUCT) {
+        if (temp->type == STRUCT) {
             UserInfo *user = temp->data;
-            if(strcmp(user->nickname,name) == 0) {
+            if (strcmp(user->nickname, name) == 0) {
                 return user;
             }
         }
@@ -237,12 +273,12 @@ int main(void) {
     // if(userLogin(tempUserId, tempUserPwd)) {
     //     printf("Login success");
     // }
-    FILE *fp2 = fopen("info.txt", "r"); // 파일을 읽기 모드로 엽니다.
-
-    loadAllMembers(fp2);
-    char *result = findPwd("gg", "gg");
-    fclose(fp2);
-    printf("%s\n",result);
+    // FILE *fp2 = fopen("info.txt", "r"); // 파일을 읽기 모드로 엽니다.
+    //
+    // loadAllMembers(fp2);
+    // char *result = findPwd("gg", "gg");
+    // fclose(fp2);
+    // printf("%s\n",result);
 
 
 
@@ -250,15 +286,15 @@ int main(void) {
     // insertBoard(board);
     // showData(BOARD);
     // showData(STRUCT);
-    FILE *fp3 = fopen("group.txt", "r");
-    message *newMessage = initMessage("junyeong","a","hello");
-    insertMessage(newMessage);
-    printMessage("junyeong");
-
-    UserInfo user1 = {"AliceTest", "alice123test", "password1t"};
-    UserInfo user2 = {"Bob22Test", "bob456test", "password2t"};
-    insertData(&user1, STRUCT);
-    insertData(&user2, STRUCT);
+    // FILE *fp3 = fopen("group.txt", "r");
+    // message *newMessage = initMessage("junyeong","a","hello");
+    // insertMessage(newMessage);
+    // printMessage("junyeong");
+    //
+    // UserInfo user1 = {"AliceTest", "alice123test", "password1t"};
+    // UserInfo user2 = {"Bob22Test", "bob456test", "password2t"};
+    // insertData(&user1, STRUCT);
+    // insertData(&user2, STRUCT);
     //
     // group *newGroup = createGroup("StudyGroup", "Alice");
     // if (newGroup != NULL) {
@@ -269,18 +305,45 @@ int main(void) {
     // free(newGroup->groupName);
     // free(newGroup->leaderName);
     // free(newGroup);
-    loadGroup(fp3);
+    // loadGroup(fp3);
+    //
+    // joinGroup("StudyGroup","AliceTest");
+    // joinGroup("StudyGroup","Bob22Test");
+    // fclose(fp3);
+    // FILE *fp4 = fopen("group.txt", "a");
+    // group *testGroup = findGroup("StudyGroup");
+    // saveGroup(fp4, testGroup);
+    // free(testGroup);
+    // fclose(fp4);
+    // 1. 파일에서 사용자 정보를 로드
+    FILE *fp = fopen("info.txt", "r");
+    if (fp) {
+        loadAllMembers(fp); // 메모리로 사용자 정보 로드
+        fclose(fp);
+    } else {
+        printf("Error loading info.txt\n");
+        return 1;
+    }
 
-    joinGroup("StudyGroup","AliceTest");
-    joinGroup("StudyGroup","Bob22Test");
-    fclose(fp3);
-    FILE *fp4 = fopen("group.txt", "a");
-    group *testGroup = findGroup("StudyGroup");
-    saveGroup(fp4, testGroup);
-    free(testGroup);
-    fclose(fp4);
+    // 사용자 입력
+    char name[50], id[50], newPwd[50];
+    printf("이름을 입력해 주세요: ");
+    scanf("%49s", name);
+    printf("ID를 입력해 주세요: ");
+    scanf("%49s", id);
+    printf("새로운 비밀번호를 입력해 주세요: ");
+    scanf("%49s", newPwd);
 
+    // 비밀번호 재설정 및 파일 업데이트
+    if (resetAndUpdatePwd("info.txt", name, id, newPwd)) {
+        printf("Password reset successfully.\n");
+    } else {
+        printf("Password reset failed.\n");
+    }
 
+    // 메모리에 저장된 사용자 목록 출력
+    printf("Updated user data:\n");
+    showData(STRUCT);
 
     return 0;
 }
