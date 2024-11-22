@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "CteamProject::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-CteamProject-Debug-b481b752ba8333ea5814.json",
+					"jsonFile" : "target-CteamProject-Debug-6d140482c61fb700c442.json",
 					"name" : "CteamProject",
 					"projectIndex" : 0
 				}
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/junyeong/maindir/CteamProject/cmake-build-debug",
-		"source" : "/Users/junyeong/maindir/CteamProject"
+		"build" : "/Users/uzih05/CLionProjects/CTeamProject/cmake-build-debug",
+		"source" : "/Users/uzih05/CLionProjects/CTeamProject"
 	},
 	"version" : 
 	{

@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/junyeong/maindir/CteamProject/cmake-build-debug"
+			"value" : "/Users/uzih05/CLionProjects/CTeamProject/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -383,7 +383,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/junyeong/maindir/CteamProject/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/uzih05/CLionProjects/CTeamProject/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -395,7 +395,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "Ninja"
+			"value" : "Unix Makefiles"
 		},
 		{
 			"name" : "CMAKE_GENERATOR_INSTANCE",
@@ -443,7 +443,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/junyeong/maindir/CteamProject"
+			"value" : "/Users/uzih05/CLionProjects/CTeamProject"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -494,12 +494,16 @@
 			"properties" : 
 			[
 				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "Path to a program."
 				}
 			],
-			"type" : "UNINITIALIZED",
-			"value" : "/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja"
+			"type" : "FILEPATH",
+			"value" : "/usr/bin/make"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -675,7 +679,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk"
+			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk"
 		},
 		{
 			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
@@ -1051,7 +1055,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include"
+			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include"
 		},
 		{
 			"name" : "CURL_LIBRARY_DEBUG",
@@ -1083,7 +1087,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurl.tbd"
+			"value" : "/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib/libcurl.tbd"
 		},
 		{
 			"name" : "CteamProject_BINARY_DIR",
@@ -1095,7 +1099,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/junyeong/maindir/CteamProject/cmake-build-debug"
+			"value" : "/Users/uzih05/CLionProjects/CTeamProject/cmake-build-debug"
 		},
 		{
 			"name" : "CteamProject_IS_TOP_LEVEL",
@@ -1119,7 +1123,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/junyeong/maindir/CteamProject"
+			"value" : "/Users/uzih05/CLionProjects/CTeamProject"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_CURL",
@@ -1131,7 +1135,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurl.tbd][/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include][c ][v8.4.0()]"
+			"value" : "[/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/lib/libcurl.tbd][/Library/Developer/CommandLineTools/SDKs/MacOSX15.1.sdk/usr/include][c ][v8.7.1()]"
 		},
 		{
 			"name" : "PKG_CONFIG_ARGN",
