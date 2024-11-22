@@ -317,13 +317,8 @@ int main(void) {
     // fclose(fp4);
     // 1. 파일에서 사용자 정보를 로드
     FILE *fp = fopen("info.txt", "r");
-    if (fp) {
-        loadAllMembers(fp); // 메모리로 사용자 정보 로드
-        fclose(fp);
-    } else {
-        printf("Error loading info.txt\n");
-        return 1;
-    }
+    loadAllMembers(fp); // 메모리로 사용자 정보 로드
+    fclose(fp);
 
     // 사용자 입력
     char name[50], id[50], newPwd[50];
@@ -336,9 +331,9 @@ int main(void) {
 
     // 비밀번호 재설정 및 파일 업데이트
     if (resetAndUpdatePwd("info.txt", name, id, newPwd)) {
-        printf("Password reset successfully.\n");
+        printf("[Sys]: Password reset successfully.\n");
     } else {
-        printf("Password reset failed.\n");
+        printf("[Sys]: Password reset failed.\n");
     }
 
     // 메모리에 저장된 사용자 목록 출력
