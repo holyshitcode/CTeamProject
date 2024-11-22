@@ -24,40 +24,35 @@ groups groupList;
 
 UserInfo *findUser(const char *name);
 
-int resetAndUpdatePwd(FILE *fp, FILE *tempFp, const char *name, const char *id, const char *newPwd) {
-    if (!fp || !tempFp) {
-        fprintf(stderr, "Invalid file pointers provided.\n");
-        return 0;
-    }
+int resetPwd(const char *fileName, const char *name, const char *id, const char *newPwd) {
 
-    char fileNickname[20];
-    char fileId[30];
-    char filePasswd[30];
-    int isUpdated = 0;
+    UserInfo *user = findUser(name);
+    if (user != NULL && strcmp(user->id, id) == 0) {
 
-    // 파일 읽기 및 수정
-    while (fscanf(fp, "%s %s %s", fileNickname, fileId, filePasswd) == 3) {
-        if (strcmp(fileNickname, name) == 0 && strcmp(fileId, id) == 0) {
-            fprintf(tempFp, "%s %s %s\n", fileNickname, fileId, newPwd); // 새 비밀번호 기록
-            isUpdated = 1;
-
-            // 메모리 업데이트
-            UserInfo *user = findUser(name);
-            if (user != NULL && strcmp(user->id, id) == 0) {
-                strcpy(user->passwd, newPwd);
-            }
-        } else {
-            fprintf(tempFp, "%s %s %s\n", fileNickname, fileId, filePasswd);
-        }
-    }
-
-    if (isUpdated) {
+        strcpy(user->passwd, newPwd);
         printf("'%s'님의 비밀번호가 성공적으로 업데이트 되었습니다.\n", name);
-        return 1;
-    } else {
-        printf("'%s'님의 id가 '%s'인 사용자를 찾지 못했습니다.\n", name, id);
-        return 0;
+
+        FILE *fp = fopen(fileName, "w");
+        if (!fp) {
+            fprintf(stderr, "Error opening file: %s\n", fileName);
+            return 0;
+        }
+
+        node *temp = head;
+        while (temp != NULL) {
+            if (temp->type == STRUCT) {
+                UserInfo *currentUser = temp->data;
+                fprintf(fp, "%s %s %s\n", currentUser->nickname, currentUser->id, currentUser->passwd);
+            }
+            temp = temp->next;
+        }
+
+        fclose(fp);
+        return 1; // 성공
     }
+
+    printf("'%s'님의 id가 '%s'인 사용자를 찾지 못했습니다.\n", name, id);
+    return 0; // 실패
 }
 
 
@@ -306,14 +301,8 @@ int main(void) {
     // fclose(fp4);
 
     FILE *fp = fopen("info.txt", "r");
-    FILE *tempFp = fopen("temp.txt", "w");
-
-    if (!fp || !tempFp) {
-        fprintf(stderr, "Error opening files.\n");
-        if (fp) fclose(fp);
-        if (tempFp) fclose(tempFp);
-        return 1;
-    }
+    loadAllMembers(fp); // Linked List에 사용자 데이터 로드
+    fclose(fp);
 
     char name[50], id[50], newPwd[50];
     printf("이름을 입력해 주세요: ");
@@ -323,22 +312,12 @@ int main(void) {
     printf("새로운 비밀번호를 입력해 주세요: ");
     scanf("%49s", newPwd);
 
-    if (resetAndUpdatePwd(fp, tempFp, name, id, newPwd)) {
+    if (resetPwd("info.txt", name, id, newPwd)) {
         printf("Password reset successfully.\n");
-
-        // 파일 교체
-        fclose(fp);
-        fclose(tempFp);
-        remove("info.txt");
-        rename("temp.txt", "info.txt");
     } else {
         printf("Password reset failed.\n");
-        fclose(fp);
-        fclose(tempFp);
-        remove("temp.txt"); // 실패 시 임시 파일 제거
     }
 
-    // 메모리 상 사용자 출력
     printf("Updated user data:\n");
     showData(STRUCT);
 
