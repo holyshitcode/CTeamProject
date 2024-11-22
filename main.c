@@ -24,13 +24,9 @@ groups groupList;
 
 UserInfo *findUser(const char *name);
 
-int resetAndUpdatePwd(const char *fileName, const char *name, const char *id, const char *newPwd) {
-    FILE *fp = fopen(fileName, "r");
-    FILE *tempFp = fopen("temp.txt", "w");
+int resetAndUpdatePwd(FILE *fp, FILE *tempFp, const char *name, const char *id, const char *newPwd) {
     if (!fp || !tempFp) {
-        fprintf(stderr, "Error opening file.\n");
-        if (fp) fclose(fp);
-        if (tempFp) fclose(tempFp);
+        fprintf(stderr, "Invalid file pointers provided.\n");
         return 0;
     }
 
@@ -54,13 +50,6 @@ int resetAndUpdatePwd(const char *fileName, const char *name, const char *id, co
             fprintf(tempFp, "%s %s %s\n", fileNickname, fileId, filePasswd);
         }
     }
-
-    fclose(fp);
-    fclose(tempFp);
-
-    // 파일 교체
-    remove(fileName);
-    rename("temp.txt", fileName);
 
     if (isUpdated) {
         printf("'%s'님의 비밀번호가 성공적으로 업데이트 되었습니다.\n", name);
@@ -315,12 +304,17 @@ int main(void) {
     // saveGroup(fp4, testGroup);
     // free(testGroup);
     // fclose(fp4);
-    // 1. 파일에서 사용자 정보를 로드
-    FILE *fp = fopen("info.txt", "r");
-    loadAllMembers(fp); // 메모리로 사용자 정보 로드
-    fclose(fp);
 
-    // 사용자 입력
+    FILE *fp = fopen("info.txt", "r");
+    FILE *tempFp = fopen("temp.txt", "w");
+
+    if (!fp || !tempFp) {
+        fprintf(stderr, "Error opening files.\n");
+        if (fp) fclose(fp);
+        if (tempFp) fclose(tempFp);
+        return 1;
+    }
+
     char name[50], id[50], newPwd[50];
     printf("이름을 입력해 주세요: ");
     scanf("%49s", name);
@@ -329,14 +323,22 @@ int main(void) {
     printf("새로운 비밀번호를 입력해 주세요: ");
     scanf("%49s", newPwd);
 
-    // 비밀번호 재설정 및 파일 업데이트
-    if (resetAndUpdatePwd("info.txt", name, id, newPwd)) {
-        printf("[Sys]: Password reset successfully.\n");
+    if (resetAndUpdatePwd(fp, tempFp, name, id, newPwd)) {
+        printf("Password reset successfully.\n");
+
+        // 파일 교체
+        fclose(fp);
+        fclose(tempFp);
+        remove("info.txt");
+        rename("temp.txt", "info.txt");
     } else {
-        printf("[Sys]: Password reset failed.\n");
+        printf("Password reset failed.\n");
+        fclose(fp);
+        fclose(tempFp);
+        remove("temp.txt"); // 실패 시 임시 파일 제거
     }
 
-    // 메모리에 저장된 사용자 목록 출력
+    // 메모리 상 사용자 출력
     printf("Updated user data:\n");
     showData(STRUCT);
 
