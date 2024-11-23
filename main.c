@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "board.h"
@@ -72,5 +72,20 @@ int main(void) {
 
 
 
+    return 0;
+}*/
+
+#include <ncurses.h>
+#include "login_register.h"
+
+int main() {
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+
+    handleLogin(stdscr); // 로그인 화면에서 시작
+
+    endwin();
     return 0;
 }
