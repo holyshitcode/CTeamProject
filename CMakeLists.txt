@@ -13,17 +13,16 @@ add_executable(CteamProject main.c list.c board.c
         user.h
         user.c
         login_register.c
-        login_register.h)
+        login_register.h
+        handle_dashboard.c
+        handle_dashboard.h)
 
 # libcurl 링크
 target_link_libraries(CteamProject CURL::libcurl)
 
 # gui 부분
-include_directories("C:/msys64/mingw64/include/ncursesw")
+find_package(Curses REQUIRED)
+include_directories("C:/msys64/mingw64/include/ncursesw/")
 link_directories("C:/msys64/mingw64/lib")
 
-add_executable(CteamProject main.c
-        login_register.c
-        login_register.h
-)
 target_link_libraries(CteamProject ncursesw)

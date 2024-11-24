@@ -1,0 +1,3 @@
+C:/git/cmake-build-debug/CMakeFiles/CteamProject.dir
+C:/git/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/git/cmake-build-debug/CMakeFiles/rebuild_cache.dir

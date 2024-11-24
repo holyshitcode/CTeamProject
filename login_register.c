@@ -2,10 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "handle_dashboard.h"
 
 #define MAX_LEN 30
-
-
 
 // 사용자 정보 구조체
 typedef struct UserInfo {
@@ -13,8 +12,8 @@ typedef struct UserInfo {
     char passwd[MAX_LEN];
 } UserInfo;
 
-int userLogin(const char *id, const char *passwd);
-int userRegister(char *id, char *passwd);
+int userlogin(const char *id, const char *passwd);
+int userregister(char *id, char *passwd);
 void drawLoginButton(WINDOW *win, int focus);
 void drawRegisterButton(WINDOW *win, int focus);
 void drawLoginWindow(WINDOW *win, int focus, const char *msg, const char *id, const char *passwd);
@@ -23,7 +22,7 @@ void handleLogin(WINDOW *win);
 void handleRegister(WINDOW *win);
 
 // 간단한 로그인 함수
-int userLogin(const char *id, const char *passwd) {
+int userlogin(const char *id, const char *passwd) {
     if (strcmp(id, "admin") == 0 && strcmp(passwd, "1234") == 0) {
         return 1; // 로그인 성공
     }
@@ -31,48 +30,40 @@ int userLogin(const char *id, const char *passwd) {
 }
 
 // 간단한 회원가입 함수
-int userRegister(char *id, char *passwd) {
+int userregister(char *id, char *passwd) {
     if (strcmp(id, "admin") == 0) {
         return 0; // 이미 존재하는 아이디
     }
     return 1; // 회원가입 성공
 }
 
-// 로그인 버튼을 그리는 함수
-void drawLoginButton(WINDOW *win, int focus) {
+void drawButtonsLogin(WINDOW *win, int focus) {
     int buttonStartY = 9;
     int buttonStartX = 17;
 
+    // Login Button
     if (focus == 2) {
-        wattron(win, A_REVERSE);
+        wattron(win, A_REVERSE); // 하이라이트
     }
-
     mvwprintw(win, buttonStartY, buttonStartX, "Login");
-
     if (focus == 2) {
-        wattroff(win, A_REVERSE);
+        wattroff(win, A_REVERSE); // 하이라이트 해제
     }
 
-    wrefresh(win);
-}
-
-// 회원가입 버튼을 그리는 함수
-void drawRegisterButton(WINDOW *win, int focus) {
-    int buttonStartY = 11;
-    int buttonStartX = 13;
-
+    // Register Button
+    buttonStartY = 11;
+    buttonStartX = 13;
     if (focus == 3) {
-        wattron(win, A_REVERSE);
+        wattron(win, A_REVERSE); // 하이라이트
     }
-
     mvwprintw(win, buttonStartY, buttonStartX, "Go To Register");
-
     if (focus == 3) {
-        wattroff(win, A_REVERSE);
+        wattroff(win, A_REVERSE); // 하이라이트 해제
     }
 
     wrefresh(win);
 }
+
 
 // 로그인 창을 그리는 함수
 void drawLoginWindow(WINDOW *win, int focus, const char *msg, const char *id, const char *passwd) {
@@ -102,14 +93,12 @@ void drawLoginWindow(WINDOW *win, int focus, const char *msg, const char *id, co
     mvwprintw(win, 7, 1, "                                     ");
     mvwprintw(win, 7, 3, msg);
 
-    drawLoginButton(win, focus);
-    drawRegisterButton(win, focus);
+    drawButtonsLogin(win, focus);
 
     wrefresh(win);
 }
 
-// 로그인 버튼을 그리는 함수
-void drawRegisterButton2(WINDOW *win, int focus) {
+void drawButtonsRegister(WINDOW *win, int focus) {
     int buttonStartY = 11;
     int buttonStartX = 19;
 
@@ -123,13 +112,9 @@ void drawRegisterButton2(WINDOW *win, int focus) {
         wattroff(win, A_REVERSE);
     }
 
-    wrefresh(win);
-}
-
-// 회원가입 버튼을 그리는 함수
-void drawLoginButton2(WINDOW *win, int focus) {
-    int buttonStartY = 13;
-    int buttonStartX = 18;
+    // Register Button
+    buttonStartY = 13;
+    buttonStartX = 18;
 
     if (focus == 4) {
         wattron(win, A_REVERSE);
@@ -143,6 +128,7 @@ void drawLoginButton2(WINDOW *win, int focus) {
 
     wrefresh(win);
 }
+
 
 // 회원가입 창을 그리는 함수
 void drawRegisterWindow(WINDOW *win, int focus, const char *msg, const char *id, const char *passwd, const char *nickname) {
@@ -182,12 +168,10 @@ void drawRegisterWindow(WINDOW *win, int focus, const char *msg, const char *id,
     mvwprintw(win, 9, 1, "                                     ");
     mvwprintw(win, 9, 3, msg);
 
-    drawLoginButton2(win, focus);
-    drawRegisterButton2(win, focus);
+    drawButtonsRegister(win, focus);
 
     wrefresh(win);
 }
-
 
 // 로그인 및 회원가입 메인 화면을 관리하는 함수
 void handleLogin(WINDOW *win) {
@@ -233,10 +217,12 @@ void handleLogin(WINDOW *win) {
                 noecho();
             } else if (focus == 2) {
                 // 로그인 버튼을 클릭하면 로그인 시도
-                if (userLogin(id, passwd)) {
+                if (userlogin(id, passwd)) {
                     strcpy(message, "        Login successful!");
-                    // 로그인 성공 후 다음 단계로 이동
-                    break;
+                    clear();
+                    refresh();
+                    handleDashboard(win); // 대시보드 화면으로 이동
+                    return;
                 } else {
                     strcpy(message, "           Login failed!");
                 }
@@ -301,7 +287,7 @@ void handleRegister(WINDOW *win) {
                 noecho();
             } else if (registerFocus == 3) {
                 // Register 버튼 처리
-                if (userRegister(id, passwd)) {
+                if (userregister(id, passwd)) {
                     strcpy(registerMessage, "Registration successful!");
                     clear();
                     refresh();
