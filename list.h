@@ -2,7 +2,7 @@
 #define LIST_H
 
 #include <stdbool.h>
-
+char *loginUserName[21];
 /**
  * 노드의 데이터타입을 구분하는 enum
  */

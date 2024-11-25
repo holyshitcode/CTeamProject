@@ -3,6 +3,9 @@
 #include <string.h>
 #include "boardGui.h"
 #include "loginGui.h"
+#include "list.h"
+#include "user.h"
+#include "board.h"
 
 
 #define MAX_LEN 30
@@ -15,10 +18,6 @@ typedef struct {
     char members[5][MAX_LEN]; // 그룹 멤버들 (최대 5명)
 } Group;
 
-typedef struct {
-    char boardTitle[MAX_LEN];
-    char boardContent[256];
-} Post;
 
 typedef struct {
     char sender[MAX_LEN];
@@ -27,7 +26,6 @@ typedef struct {
 
 // 초기화된 데이터
 Group userGroup = {"Group", {"user1", "user2", "user3", "", ""}};
-Post posts[MAX_POSTS] = { {"First Post", "This is the content of the first post."}, {"Second Post", "Content of second post."} };
 Message messages[MAX_MESSAGES] = { {"", ""}, {"", ""}, {"", ""} };
 
 // 중앙 정렬을 위한 함수
@@ -37,15 +35,114 @@ void printCentered(WINDOW *win, int y, int width, const char *text) {
     mvwprintw(win, y, x, "%s", text);
 }
 
-// 대시보드 화면을 그리는 함수
+// 게시판 리스트 출력 함수
+void showBoardList(WINDOW *win, int width) {
+    int y = 2; // 출력 시작 위치
+    node *temp = head; // 전역 변수로 선언된 게시판 리스트의 헤드 사용
+    int index = 1;
+
+    while (temp != NULL) {
+        if (temp->type == BOARD) {
+            Board *board = (Board *) temp->data;
+            char buffer[256];
+            snprintf(buffer, sizeof(buffer), "%d. %s %10s", index++, board->writer, board->contents);
+            mvwprintw(win, y++, 2, "%s", buffer);
+        }
+        temp = temp->next;
+
+    }
+
+    wrefresh(win);
+}
+
+
+// 게시물 상세보기 함수
+void viewPost(WINDOW *win, int width) {
+    mvwprintw(win, 2, 2, "Enter post number: ");
+    char numStr[10];
+    wgetstr(win, numStr);
+    int postNum = atoi(numStr) - 1;
+
+    if (postNum >= 0) {
+        node *temp = head; // 리스트 탐색 시작
+        int index = 0;
+        while (temp != NULL) {
+            if (temp->type == BOARD) {
+                if (index == postNum) {
+                    Board *board = (Board *) temp->data;
+                    wclear(win);
+                    box(win, 0, 0);
+                    mvwprintw(win, 2, 2, "Post by: %s", board->writer);
+                    mvwprintw(win, 3, 2, "Content: %s", board->contents);
+                    mvwprintw(win, 5, 2, "Likes: %d | Hits: %d", board->likeCount, board->boardHit);
+                    wrefresh(win);
+                    wgetch(win); // 사용자 입력 대기
+                    return;
+                }
+                index++;
+            }
+            temp = temp->next;
+        }
+    }
+
+    mvwprintw(win, 7, 2, "Invalid post number.");
+    wrefresh(win);
+    wgetch(win); // 사용자 입력 대기
+}
+
+void addNewPost(WINDOW *win, int width, FILE *fp) {
+    char writer[20], content[256];
+    echo(); // 입력 표시 활성화
+    mvwprintw(win, 2, 2, "Writer: ");
+    wgetstr(win, writer);
+    mvwprintw(win, 3, 2, "Content: ");
+    wgetstr(win, content);
+    noecho(); // 입력 표시 비활성화
+
+    // 새 게시글 생성
+    Board *newPost = initBoard(writer, content);
+    if (newPost == NULL) {
+        mvwprintw(win, 5, 2, "Failed to create new post.");
+        wrefresh(win);
+        wgetch(win);
+        return;
+    }
+
+    // 메모리에 삽입
+    insertBoard(newPost);
+
+    // 파일에 저장
+    if (fp != NULL) {
+        saveBoard(newPost, fp); // `saveBoard`는 한 줄씩 저장
+        fflush(fp); // 즉시 파일에 쓰기
+        mvwprintw(win, 5, 2, "Post added and saved successfully!");
+    } else {
+        mvwprintw(win, 5, 2, "Post added, but file saving failed.");
+    }
+
+    wrefresh(win);
+    wgetch(win); // 사용자 입력 대기
+}
+
+// 게시판 데이터 로드 함수 (파일에서 메모리로)
+void loadBoardData(FILE *fp) {
+    if (fp == NULL) {
+        printf("Failed to open board file.\n");
+        return;
+    }
+
+    loadAllBoards(fp); // 파일 데이터를 링크드 리스트에 로드
+    printf("Board data loaded successfully.\n");
+}
+
 void handleDashboard(WINDOW *win) {
     clear();
     refresh();
 
     int dashboardHeight = 25, dashboardWidth = 50;
-    int dashboardStartY = 2, dashboardStartX = 10;  // 대시보드의 시작 위치
+    int dashboardStartY = 2, dashboardStartX = 10;
 
-    int leftWidth = 20, rightWidth = 80;  // 왼쪽 박스와 오른쪽 박스의 너비
+    int leftWidth = 20, rightWidth = 80;
     int totalWidth = leftWidth + rightWidth;
     int totalHeight = dashboardHeight;
 
@@ -55,119 +152,103 @@ void handleDashboard(WINDOW *win) {
     box(leftWin, 0, 0);
     box(rightWin, 0, 0);
 
-    // 왼쪽 박스의 항목들 표시
-    printCentered(leftWin, 1, leftWidth, "BLOG");
-    printCentered(leftWin, 3, leftWidth, "*admin*"); // 내 닉네임 표시
-    printCentered(leftWin, 4, leftWidth, userGroup.groupName); // 내 그룹 표시
-    printCentered(leftWin, 6, leftWidth, "Posts");
-    for (int i = 0; i < 2; i++) {
-        char postStr[MAX_LEN + 10];
-        snprintf(postStr, sizeof(postStr), "%d. %s", i + 1, posts[i].boardTitle);
-        printCentered(leftWin, 7 + i, leftWidth, postStr);
-    }
-
-    // 메뉴 항목들
     char *menu[] = {
         "Group",
         "Board",
-        "Messages",
-        "Logout",  // 로그아웃 버튼 추가
-        "Exit"     // 종료 버튼 추가
+        "Message",
+        "Logout",
+        "Exit"
     };
 
-    // 왼쪽 박스의 메뉴 항목들 표시
     for (int i = 0; i < 5; i++) {
         printCentered(leftWin, 12 + i, leftWidth, menu[i]);
     }
 
-    // 왼쪽 박스에 포커스를 맞춘 항목에 처음부터 강조 표시
-    wattron(leftWin, A_REVERSE);  // 처음에 "Group"에 하이라이트를 적용
+    wattron(leftWin, A_REVERSE);
     printCentered(leftWin, 12 + 0, leftWidth, menu[0]);
     wattroff(leftWin, A_REVERSE);
 
     wrefresh(leftWin);
     wrefresh(rightWin);
 
-    // 사용자 입력 처리
-    int selected = 0;  // 왼쪽 박스에서 선택된 항목 (처음부터 0으로 설정)
-    int focusBox = 0;  // 0: 왼쪽 박스, 1: 오른쪽 박스
+    FILE *fp = fopen("board.txt", "a+");
+    if (fp == NULL) {
+        printCentered(rightWin, 2, rightWidth, "Failed to open board file.");
+        wrefresh(rightWin);
+        return;
+    }
+    loadBoardData(fp);
+
+    int selected = 0;
+    int focusBox = 0;
     int ch;
 
     while ((ch = wgetch(leftWin)) != 'q') {
-        // 왼쪽 박스에서 포커스 이동
         if (focusBox == 0) {
-            if (ch == 'w' || ch == 'W') {  // 위로 이동 (왼쪽 박스에서)
-                selected = (selected == 0) ? 4 : selected - 1;  // 위로 이동
-            } else if (ch == 's' || ch == 'S') {  // 아래로 이동 (왼쪽 박스에서)
-                selected = (selected == 4) ? 0 : selected + 1;  // 아래로 이동
-            } else if (ch == 10) {  // 엔터키 처리 (오른쪽 창으로 이동)
+            if (ch == 'w' || ch == 'W') {
+                selected = (selected == 0) ? 4 : selected - 1;
+            } else if (ch == 's' || ch == 'S') {
+                selected = (selected == 4) ? 0 : selected + 1;
+            } else if (ch == 10) {
                 focusBox = 1;
-                wclear(rightWin);  // 오른쪽 창 초기화
-                box(rightWin, 0, 0);  // 오른쪽 창 다시 그리기
-                wrefresh(rightWin);  // 오른쪽 창 갱신
+                wclear(rightWin);
+                box(rightWin, 0, 0);
 
-                // 왼쪽 박스에서 선택된 항목에 따라 오른쪽 창에 내용 표시
-                if (selected == 0) {
-                    printCentered(rightWin, 1, rightWidth, "Group: ");
-                    printCentered(rightWin, 2, rightWidth, userGroup.groupName);
-                    printCentered(rightWin, 3, rightWidth, "Create Group or Join?");
-                } else if (selected == 1) {
+                if (selected == 1) { // Board 메뉴
                     printCentered(rightWin, 1, rightWidth, "Board Posts:");
-                    for (int i = 0; i < 2; i++) {
-                        char postStr[MAX_LEN + 10];
-                        snprintf(postStr, sizeof(postStr), "%d. %s", i + 1, posts[i].boardTitle);
-                        printCentered(rightWin, 2 + i, rightWidth, postStr);
+                    showBoardList(rightWin, rightWidth);
+
+                    mvwprintw(rightWin, 20, 2, "Press 'n' to add new post, 'v' to view post, 'b' to go back.");
+                    wrefresh(rightWin);
+
+                    int boardCh;
+                    while ((boardCh = wgetch(rightWin)) != 'b') { // 'b' 키로 복귀
+                        if (boardCh == 'n') {
+                            addNewPost(rightWin, rightWidth, fp);
+                            wclear(rightWin);
+                            box(rightWin, 0, 0);
+                            printCentered(rightWin, 1, rightWidth, "Board Posts:");
+                            showBoardList(rightWin, rightWidth);
+                            mvwprintw(rightWin, 20, 2, "Press 'n' to add new post, 'v' to view post, 'b' to go back.");
+                        } else if (boardCh == 'v') {
+                            viewPost(rightWin, rightWidth);
+                            wclear(rightWin);
+                            box(rightWin, 0, 0);
+                            printCentered(rightWin, 1, rightWidth, "Board Posts:");
+                            showBoardList(rightWin, rightWidth);
+                            mvwprintw(rightWin, 20, 2, "Press 'n' to add new post, 'v' to view post, 'b' to go back.");
+                        }
                     }
-                    printCentered(rightWin, 5, rightWidth, "new post.");
-                } else if (selected == 2) {
-                    printCentered(rightWin, 1, rightWidth, "Messages:");
-                    for (int i = 0; i < 3; i++) {
-                        char messageStr[MAX_LEN + 100];
-                        snprintf(messageStr, sizeof(messageStr), "%s: %s", messages[i].sender, messages[i].message);
-                        printCentered(rightWin, 2 + i, rightWidth, messageStr);
-                    }
-                    printCentered(rightWin, 6, rightWidth, "Press 'r' to reply.");
-                } else if (selected == 3) {
-                    // 로그아웃 처리
+                } else if (selected == 3) { // Logout
                     clear();
                     refresh();
-                    handleLogin(win); // 로그인 화면으로 돌아가기
+                    fclose(fp); // 파일 닫기
+                    handleLogin(win);
                     return;
-                } else if (selected == 4) {
-                    // 종료 처리
+                } else if (selected == 4) { // Exit
+                    fclose(fp); // 파일 닫기
                     endwin();
                     return;
                 }
 
-                wrefresh(rightWin);  // 오른쪽 창 갱신
+                wrefresh(rightWin);
+                focusBox = 0; // 다시 메뉴로 복귀
             }
         }
 
-        // 오른쪽 창에서 선택 후 왼쪽 창으로 돌아가게 할 부분 (b키 처리)
-        if (focusBox == 1) {
-            if (ch == 'b') {  // b키 눌렀을 때 왼쪽 창에서 계속 선택하도록 수정
-                // 오른쪽 창에서 b를 눌렀을 때 왼쪽 창에서 다시 선택하도록 처리
-                focusBox = 0;
-                wclear(rightWin);  // 오른쪽 창 초기화
-                box(rightWin, 0, 0);  // 오른쪽 창 다시 그리기
-                wrefresh(rightWin);  // 오른쪽 창 갱신
-            }
-        }
-
-        // 왼쪽 박스에 포커스를 맞춘 항목에 강조 표시
         for (int i = 0; i < 5; i++) {
             if (i == selected && focusBox == 0) {
-                wattron(leftWin, A_REVERSE);  // 포커스된 항목 강조
+                wattron(leftWin, A_REVERSE);
                 printCentered(leftWin, 12 + i, leftWidth, menu[i]);
-                wattroff(leftWin, A_REVERSE);  // 강조 해제
+                wattroff(leftWin, A_REVERSE);
             } else {
                 printCentered(leftWin, 12 + i, leftWidth, menu[i]);
             }
         }
 
         wrefresh(leftWin);
-        wrefresh(rightWin);
     }
 
+    fclose(fp); // 파일 닫기
     endwin();
 }

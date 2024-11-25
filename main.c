@@ -1,4 +1,6 @@
 #include <ncurses.h>
+
+#include "boardGui.h"
 #include "loginGui.h"
 #include "user.h"
 
@@ -9,9 +11,9 @@ int main() {
     // fclose(fp);
     // fclose(fp2);
     initscr();
-    // FILE *fp = fopen("userInfo.txt", "r");
-    // loadMember(fp);
-    // fclose(fp);
+    FILE *fp = fopen("userInfo.txt", "r");
+    loadAllMembers(fp);
+    fclose(fp);
     //
     // UserInfo *user = findUser("a");
     // printf("\n%s\n", user->nickname);
@@ -21,6 +23,9 @@ int main() {
     // printf("b=%d\n", b);
     // printf("login = %d\n",userLogin("cc","dd"));
     // fclose(fp2);
+    FILE *fp3 = fopen("board.txt", "r");
+    loadBoardData(fp3);
+    fclose(fp3);
     cbreak();
     noecho();
     keypad(stdscr, TRUE);

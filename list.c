@@ -10,7 +10,7 @@
 // 전역 변수 정의
 node *head = NULL;
 node *tail = NULL;
-char *loginUserName[21];
+
 
 void insertData(void *data, dataType type) {
     node *temp = malloc(sizeof(node));
