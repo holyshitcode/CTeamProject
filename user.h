@@ -36,6 +36,6 @@ group *findGroup(const char *groupName) ;
 void joinGroup(const char *groupName, const char *username) ;
 void saveGroup(FILE *fp, const group *group) ;
 void loadGroup(FILE *fp) ;
-
+int resetPwd(const char *fileName, const char *name, const char *id, const char *newPwd);
 
 #endif

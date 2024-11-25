@@ -207,3 +207,30 @@ void loadGroup(FILE *fp) {
     free(newGroup->leaderName);
     free(newGroup);
 }
+
+int resetPwd(const char *fileName, const char *name, const char *id, const char *newPwd) {
+
+    UserInfo *user = findUser(name);
+    if (user != NULL && strcmp(user->id, id) == 0) {
+
+        strcpy(user->passwd, newPwd);
+        printf("'%s'님의 비밀번호가 성공적으로 업데이트 되었습니다.\n", name);
+
+        FILE *fp = fopen(fileName, "w");
+
+        node *temp = head;
+        while (temp != NULL) {
+            if (temp->type == STRUCT) {
+                UserInfo *currentUser = temp->data;
+                fprintf(fp, "%s %s %s\n", currentUser->nickname, currentUser->id, currentUser->passwd);
+            }
+            temp = temp->next;
+        }
+
+        fclose(fp);
+        return 1; // 성공
+    }
+
+    printf("'%s'님의 id가 '%s'인 사용자를 찾지 못했습니다.\n", name, id);
+    return 0; // 실패
+}
