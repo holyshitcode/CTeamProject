@@ -4,8 +4,6 @@
 #include <ncurses.h>
 
 // 함수 선언
-int userlogin(const char *id, const char *passwd);  // 로그인 함수
-int userregister(char *id, char *passwd);          // 회원가입 함수
 void drawLoginButton(WINDOW *win, int focus);      // 로그인 버튼 그리기
 void drawRegisterButton(WINDOW *win, int focus);   // 회원가입 버튼 그리기
 void drawLoginWindow(WINDOW *win, int focus, const char *msg, const char *id, const char *passwd);  // 로그인 창 그리기

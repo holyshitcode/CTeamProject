@@ -4,6 +4,7 @@
 #include "boardGui.h"
 #include "loginGui.h"
 
+
 #define MAX_LEN 30
 #define MAX_POSTS 5
 #define MAX_MESSAGES 3

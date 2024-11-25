@@ -27,7 +27,7 @@ groups groupList;
 
 
 char* findPwd(char* name, char* id);
-void userRegister(FILE *fp);
+int userRegister(FILE *fp,char* nickname, char* id, char* pwd);
 UserInfo *findUser(const char *name);
 void loadMember(FILE *fp);
 void loadAllMembers(FILE *fp) ;

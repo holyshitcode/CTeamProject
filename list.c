@@ -10,7 +10,7 @@
 // 전역 변수 정의
 node *head = NULL;
 node *tail = NULL;
-char *loginUserName = NULL;
+char *loginUserName[21];
 
 void insertData(void *data, dataType type) {
     node *temp = malloc(sizeof(node));
@@ -153,10 +153,14 @@ void freeList() {
     head = tail = NULL;
 }
 int userLogin(const char *id, const char *pwd) {
-    const node *temp = head;
+    node *temp = head;
+    if (temp == NULL) {
+        fprintf(stderr, "Error: head is NULL\n");
+        return 0;
+    }
     while (temp != NULL) {
         if(temp->type == STRUCT) {
-            const UserInfo *userTemp = temp->data;
+            UserInfo *userTemp = temp->data;
             if (strcmp(id, userTemp->id) == 0) {
                 if(strcmp(pwd,userTemp->passwd) == 0){
                     strcpy(loginUserName,userTemp->nickname);

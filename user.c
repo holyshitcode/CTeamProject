@@ -25,18 +25,17 @@ char* findPwd(char* name, char* id) {
 }
 
 
-void userRegister(FILE *fp) {
-    char nickname[20];
-    char id[30];
-    char passwd[30];
-
-    printf("Please enter your nickname: ");
-    scanf("%s", nickname);
-    printf("Please enter your id: ");
-    scanf("%s", id);
-    printf("Please enter your passwd: ");
-    scanf("%s", passwd);
-
+int userRegister(FILE *fp,char* nickname, char* id, char* pwd) {
+    node *temp = head;
+    while (temp != NULL) {
+        if(temp->type == STRUCT) {
+            UserInfo* userInfo = temp->data;
+            if (strcmp(userInfo->nickname, nickname) == 0) {
+                return 0;
+            }
+        }
+        temp = temp->next;
+    }
     UserInfo *user = malloc(sizeof(struct UserInfo));
     if (user == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
@@ -45,11 +44,13 @@ void userRegister(FILE *fp) {
 
     strcpy(user->nickname, nickname);
     strcpy(user->id, id);
-    strcpy(user->passwd, passwd);
-    fprintf(fp, "%s %s %s\n", nickname, id, passwd);
+    strcpy(user->passwd, pwd);
+
+    fprintf(fp, "%s %s %s\n", nickname, id, pwd);
 
     insertData(user, STRUCT);
     printf("Register Process Done.\n");
+    return 1;
 }
 
 UserInfo *findUser(const char *name) {
