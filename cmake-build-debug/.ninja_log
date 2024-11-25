@@ -1,10 +1,11 @@
 # ninja log v6
-3	191	1732062986718068591	CMakeFiles/CteamProject.dir/list.c.o	1b2df628574fc782
-148	228	1732063249991624468	CteamProject	88c49a50f5eb7d90
-1	177	1731987838442527639	CMakeFiles/CteamProject.dir/board.c.o	8a661f79b8a28de
-2	148	1732063249845453176	CMakeFiles/CteamProject.dir/main.c.o	6e86e1cd9ecea524
+1	27	1732507387184312808	CMakeFiles/CteamProject.dir/boardGui.c.o	6ad199ea4220f3cd
+1	33	1732507370627784146	CMakeFiles/CteamProject.dir/loginGui.c.o	1b722d1ef62c354
 1	142	1731988781953626169	CMakeFiles/CteamProject.dir/message.c.o	2ba1cf0b21ec346d
-2	154	1732247585786504767	CMakeFiles/CteamProject.dir/main.c.o	6e86e1cd9ecea524
-2	154	1732247585786758599	CMakeFiles/CteamProject.dir/list.c.o	1b2df628574fc782
-2	154	1732247585786909639	CMakeFiles/CteamProject.dir/user.c.o	c1caf3154b2a4756
+1	41	1732507347635270968	CMakeFiles/CteamProject.dir/user.c.o	c1caf3154b2a4756
+1	36	1732507347634764391	CMakeFiles/CteamProject.dir/main.c.o	6e86e1cd9ecea524
+1	177	1731987838442527639	CMakeFiles/CteamProject.dir/board.c.o	8a661f79b8a28de
 154	280	1732247585939081426	CteamProject	529c32cac05fc212
+2	154	1732247585786758599	CMakeFiles/CteamProject.dir/list.c.o	1b2df628574fc782
+1	241	1732507460515320505	build.ninja	c20f82e5722c527e
+1	32	1732507460521288254	CteamProject	191389e2ce115d42

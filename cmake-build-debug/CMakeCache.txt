@@ -207,6 +207,18 @@ CURL_LIBRARY_DEBUG:FILEPATH=CURL_LIBRARY_DEBUG-NOTFOUND
 //Path to a library.
 CURL_LIBRARY_RELEASE:FILEPATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurl.tbd
 
+//Path to a library.
+CURSES_CURSES_LIBRARY:FILEPATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd
+
+//Path to a library.
+CURSES_FORM_LIBRARY:FILEPATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libform.tbd
+
+//Path to a file.
+CURSES_INCLUDE_PATH:PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include
+
+//Path to a library.
+CURSES_NCURSES_LIBRARY:FILEPATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libncurses.tbd
+
 //Value Computed by CMake
 CteamProject_BINARY_DIR:STATIC=/Users/junyeong/maindir/CteamProject/cmake-build-debug
 
@@ -356,8 +368,18 @@ CURL_INCLUDE_DIR-ADVANCED:INTERNAL=1
 CURL_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CURL_LIBRARY_RELEASE
 CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CURSES_CURSES_LIBRARY
+CURSES_CURSES_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CURSES_FORM_LIBRARY
+CURSES_FORM_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CURSES_INCLUDE_PATH
+CURSES_INCLUDE_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CURSES_NCURSES_LIBRARY
+CURSES_NCURSES_LIBRARY-ADVANCED:INTERNAL=1
 //Details about finding CURL
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurl.tbd][/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include][c ][v8.4.0()]
+//Details about finding Curses
+FIND_PACKAGE_MESSAGE_DETAILS_Curses:INTERNAL=[/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd][/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include][v()]
 //ADVANCED property for variable: PKG_CONFIG_ARGN
 PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
