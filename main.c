@@ -26,7 +26,11 @@ int main() {
     FILE *fp3 = fopen("board.txt", "r");
     loadBoardData(fp3);
     fclose(fp3);
-    cbreak();
+    // FILE *fp4 = fopen("group.txt", "r");
+    // loadGroup(fp4);
+    // fclose(fp4);
+    // showGroupMembers("test");
+    // cbreak();
     noecho();
     keypad(stdscr, TRUE);
 

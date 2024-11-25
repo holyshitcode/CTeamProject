@@ -12,11 +12,7 @@
 #define MAX_POSTS 5
 #define MAX_MESSAGES 3
 
-// 구조체 정의
-typedef struct {
-    char groupName[MAX_LEN];  // 그룹 이름
-    char members[5][MAX_LEN]; // 그룹 멤버들 (최대 5명)
-} Group;
+
 
 
 typedef struct {
@@ -25,8 +21,8 @@ typedef struct {
 } Message;
 
 // 초기화된 데이터
-Group userGroup = {"Group", {"user1", "user2", "user3", "", ""}};
 Message messages[MAX_MESSAGES] = { {"", ""}, {"", ""}, {"", ""} };
+
 
 // 중앙 정렬을 위한 함수
 void printCentered(WINDOW *win, int y, int width, const char *text) {
@@ -135,6 +131,7 @@ void loadBoardData(FILE *fp) {
     printf("Board data loaded successfully.\n");
 }
 
+void handleGroupMenu(WINDOW *win);
 void handleDashboard(WINDOW *win) {
     clear();
     refresh();
@@ -193,7 +190,9 @@ void handleDashboard(WINDOW *win) {
                 focusBox = 1;
                 wclear(rightWin);
                 box(rightWin, 0, 0);
-
+                if (selected == 0) {
+                    handleGroupMenu(rightWin);
+                }
                 if (selected == 1) { // Board 메뉴
                     printCentered(rightWin, 1, rightWidth, "Board Posts:");
                     showBoardList(rightWin, rightWidth);
@@ -251,4 +250,136 @@ void handleDashboard(WINDOW *win) {
 
     fclose(fp); // 파일 닫기
     endwin();
+}
+void createNewGroup(WINDOW *win) {
+    char groupName[MAX_LEN], leaderName[MAX_LEN];
+    echo();
+    mvwprintw(win, 2, 2, "Enter Group Name: ");
+    wgetstr(win, groupName);
+    mvwprintw(win, 3, 2, "Enter Leader Name: ");
+    wgetstr(win, leaderName);
+    noecho();
+
+    if (1) {
+        group *group =createGroup(groupName, leaderName);
+        FILE *groupFp = fopen("group.txt", "a+");
+        saveGroup(groupFp,group);
+        fclose(groupFp);
+        mvwprintw(win, 5, 2, "Group '%s' created successfully.", groupName);
+    } else {
+        mvwprintw(win, 5, 2, "Failed to create group '%s'.", groupName);
+    }
+
+    wrefresh(win);
+    wgetch(win);
+}
+
+void joinExistingGroup(WINDOW *win) {
+    char groupName[MAX_LEN], userName[MAX_LEN];
+    echo();
+    mvwprintw(win, 2, 2, "Enter Group Name: ");
+    wgetstr(win, groupName);
+    mvwprintw(win, 3, 2, "Enter Your Username: ");
+    wgetstr(win, userName);
+    noecho();
+
+    // 그룹 검색
+    group *existingGroup = findGroup(groupName);
+    if (existingGroup == NULL) {
+        mvwprintw(win, 5, 2, "Group '%s' not found.", groupName);
+        wrefresh(win);
+        wgetch(win); // 사용자 입력 대기
+        return;
+    }
+
+    // 그룹에 가입
+    joinGroup(groupName, userName);
+
+    // 그룹 저장
+    FILE *groupFp2 = fopen("group.txt", "a");
+    if (groupFp2 == NULL) {
+        mvwprintw(win, 5, 2, "Failed to open group file for writing.");
+        wrefresh(win);
+        wgetch(win); // 사용자 입력 대기
+        return;
+    }
+
+    saveGroup(groupFp2, existingGroup);
+    fclose(groupFp2);
+
+    mvwprintw(win, 5, 2, "Successfully joined group '%s'.", groupName);
+    wrefresh(win);
+    wgetch(win); // 사용자 입력 대기
+}
+
+void viewGroupMembers(WINDOW *win) {
+    char groupName[MAX_LEN];
+    echo();
+    mvwprintw(win, 2, 2, "Enter Group Name: ");
+    wgetstr(win, groupName);
+    noecho();
+
+    wclear(win);
+    box(win, 0, 0);
+    FILE *viewGroupFp = fopen("group.txt", "r");
+    loadGroup(viewGroupFp);
+    fclose(viewGroupFp);
+    showGroupMembers(groupName);
+    mvwprintw(win, 2, 2, "Members of group '%s' are displayed above.", groupName);
+    wrefresh(win);
+    wgetch(win);
+}
+
+void handleGroupMenu(WINDOW *win) {
+    char *options[] = {
+        "Create Group",
+        "Join Group",
+        "View Group Members",
+        "Back"
+    };
+
+    int selected = 0;
+    int ch;
+
+    while (1) {
+        // 메뉴 표시
+        wclear(win);
+        box(win, 0, 0);
+        mvwprintw(win, 1, 2, "Group Menu:");
+
+        for (int i = 0; i < 4; i++) {
+            if (i == selected) {
+                wattron(win, A_REVERSE); // 선택된 항목 강조
+                mvwprintw(win, 3 + i, 2, "%s", options[i]);
+                wattroff(win, A_REVERSE);
+            } else {
+                mvwprintw(win, 3 + i, 2, "%s", options[i]);
+            }
+        }
+
+        wrefresh(win);
+
+        ch = wgetch(win); // 사용자 입력 대기
+
+        // 메뉴 선택
+        if (ch == 'w' || ch == 'W') {
+            selected = (selected == 0) ? 3 : selected - 1;
+        } else if (ch == 's' || ch == 'S') {
+            selected = (selected == 3) ? 0 : selected + 1;
+        } else if (ch == 10) { // Enter 키
+            if (selected == 0) {
+                // Create Group
+                createNewGroup(win);
+            } else if (selected == 1) {
+                // Join Group
+                joinExistingGroup(win);
+            } else if (selected == 2) {
+                // View Group Members
+                viewGroupMembers(win);
+            } else if (selected == 3) {
+                // Back
+                return;
+            }
+        }
+    }
 }

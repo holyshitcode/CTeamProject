@@ -1,19 +1,11 @@
-StudyGroup
-Alice
+test
+aa
 1
-Alice alice123 password1
+aa bb cc
 END_GROUP
-StudyGroup
-Alice
-3
-Alice alice123 password1
-AliceTest alice123test password1t
-Bob22Test bob456test password2t
-END_GROUP
-StudyGroup
-Alice
-3
-Alice alice123 password1
-AliceTest alice123test password1t
-Bob22Test bob456test password2t
+test
+aa
+2
+aa bb cc
+bb cc dd
 END_GROUP
