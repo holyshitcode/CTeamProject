@@ -26,11 +26,14 @@ int main() {
     FILE *fp3 = fopen("board.txt", "r");
     loadBoardData(fp3);
     fclose(fp3);
-    // FILE *fp4 = fopen("group.txt", "r");
-    // loadGroup(fp4);
-    // fclose(fp4);
-    // showGroupMembers("test");
-    // cbreak();
+    FILE *fp4 = fopen("group.txt", "r");
+    loadGroup(fp4);
+    fclose(fp4);
+    showGroupMembers("test");
+    char *name = isGroup("aa");
+    printf("%s\n", name);
+
+    cbreak();
     noecho();
     keypad(stdscr, TRUE);
 

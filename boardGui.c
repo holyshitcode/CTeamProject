@@ -132,6 +132,22 @@ void loadBoardData(FILE *fp) {
 }
 
 void handleGroupMenu(WINDOW *win);
+void displayUserInfo(WINDOW *win, const char *username, const char *groupName) {
+    mvwprintw(win, 0, 2, "User: %s | Group: %s", username, groupName);
+    wrefresh(win);
+}
+char *isGroup(char *username) {
+    for(register int i =0; i < 100; i++) {
+        for(register int j =0; j<5; j++) {
+            if(strcmp(groupList.group[i].users[j]->nickname,username)==0) {
+                return groupList.group[i].groupName;
+            }
+
+        }
+    }
+    return NULL;
+}
+
 void handleDashboard(WINDOW *win) {
     clear();
     refresh();
@@ -148,6 +164,12 @@ void handleDashboard(WINDOW *win) {
 
     box(leftWin, 0, 0);
     box(rightWin, 0, 0);
+
+    char *username= loginUserName;
+
+
+    char *groupName = isGroup(username);
+    displayUserInfo(leftWin, username, groupName);
 
     char *menu[] = {
         "Group",
