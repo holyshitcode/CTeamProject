@@ -119,9 +119,9 @@ group *createGroup(const char *groupName, const char *username) {
 }
 group *findGroup(const char *groupName) {
     for (int i = 0; i < 100; i++) {
-        if (groupList.group[i].groupName != NULL &&
-            strcmp(groupList.group[i].groupName, groupName) == 0) {
-            return &groupList.group[i];
+        if (groupList.group[i]->groupName != NULL &&
+            strcmp(groupList.group[i]->groupName, groupName) == 0) {
+            return groupList.group[i];
             }
     }
     return NULL;
@@ -163,21 +163,11 @@ void loadGroup(FILE *fp) {
     char groupName[50], leaderName[50];
     int userCount;
 
-    // 파일의 끝까지 읽기
-    while (!feof(fp)) {
-        if (fscanf(fp, "%s\n%s\n%d\n", groupName, leaderName, &userCount) != 3) {
-            // 읽기 실패 또는 파일 끝 도달
-            if (feof(fp)) {
-                break; // 파일 끝이면 루프 종료
-            }
-            printf("Error reading group data. Skipping to next group.\n");
-            continue; // 문제 발생 시 다음 데이터로 건너뜀
-        }
-
+    while (fscanf(fp, "%s\n%s\n%d\n", groupName, leaderName, &userCount) == 3) {
         group *newGroup = malloc(sizeof(group));
-        if (newGroup == NULL) {
+        if (!newGroup) {
             fprintf(stderr, "Memory allocation failed.\n");
-            exit(EXIT_FAILURE);
+            return;
         }
 
         newGroup->groupName = strdup(groupName);
@@ -186,33 +176,25 @@ void loadGroup(FILE *fp) {
 
         for (int i = 0; i < userCount; i++) {
             UserInfo *user = malloc(sizeof(UserInfo));
-            if (user == NULL) {
-                fprintf(stderr, "Memory allocation failed for user.\n");
-                break;
-            }
-            if (fscanf(fp, "%s %s %s\n", user->nickname, user->id, user->passwd) != 3) {
-                printf("Error reading user data for group: %s.\n", groupName);
+            if (!user || fscanf(fp, "%s %s %s\n", user->nickname, user->id, user->passwd) != 3) {
                 free(user);
                 break;
             }
             newGroup->users[newGroup->userCount++] = user;
         }
 
-        // 그룹을 groupList에 저장
+        // 그룹 저장
         int stored = 0;
         for (int i = 0; i < 100; i++) {
-            if (groupList.group[i].groupName == NULL) {
-                groupList.group[i] = *newGroup;  // 데이터 복사
-                printf("Loaded group: %s (Leader: %s, Members: %d)\n",
-                       newGroup->groupName, newGroup->leaderName, newGroup->userCount);
-                free(newGroup);  // 구조체 자체는 복사되었으므로 메모리 해제
+            if (!groupList.group[i]) {
+                groupList.group[i] = newGroup;
                 stored = 1;
                 break;
             }
         }
 
         if (!stored) {
-            printf("Group list is full. Cannot add more groups.\n");
+            fprintf(stderr, "Group list is full. Cannot add more groups.\n");
             free(newGroup->groupName);
             free(newGroup->leaderName);
             free(newGroup);
@@ -250,12 +232,12 @@ int resetPwd(const char *fileName, const char *name, const char *id, const char 
 void showGroupMembers(const char *groupName) {
     for (int i = 0; i < GROUP_MAX; i++) {
         // 그룹 이름이 유효하고, 입력된 그룹 이름과 일치하는지 확인
-        if (strlen(groupList.group[i].groupName) > 0 && strcmp(groupList.group[i].groupName, groupName) == 0) {
-            printf("Group: %s (Leader: %s)\n", groupList.group[i].groupName, groupList.group[i].leaderName);
+        if (strlen(groupList.group[i]->groupName) > 0 && strcmp(groupList.group[i]->groupName, groupName) == 0) {
+            printf("Group: %s (Leader: %s)\n", groupList.group[i]->groupName, groupList.group[i]->leaderName);
             printf("Members:\n");
-            for (int j = 0; j < groupList.group[i].userCount; j++) {
-                if (groupList.group[i].users[j] != NULL) {
-                    printf("- %s\n", groupList.group[i].users[j]->nickname); // 멤버 이름 출력
+            for (int j = 0; j < groupList.group[i]->userCount; j++) {
+                if (groupList.group[i]->users[j] != NULL) {
+                    printf("- %s\n", groupList.group[i]->users[j]->nickname); // 멤버 이름 출력
                 }
             }
             return;

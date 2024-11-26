@@ -23,15 +23,19 @@ int main() {
     // printf("b=%d\n", b);
     // printf("login = %d\n",userLogin("cc","dd"));
     // fclose(fp2);
-    FILE *fp3 = fopen("board.txt", "r");
-    loadBoardData(fp3);
-    fclose(fp3);
+    // FILE *fp3 = fopen("board.txt", "r");
+    // loadBoardData(fp3);
+    // fclose(fp3);
     FILE *fp4 = fopen("group.txt", "r");
     loadGroup(fp4);
     fclose(fp4);
-    showGroupMembers("test");
-    char *name = isGroup("aa");
-    printf("%s\n", name);
+    // showGroupMembers("test");
+    // char *name = isGroup("aa");
+    // printf("%s\n", name);
+
+    FILE *viewBoardFP = fopen("board.txt", "r");
+    loadAllBoards(viewBoardFP);
+    fclose(viewBoardFP);
 
     cbreak();
     noecho();

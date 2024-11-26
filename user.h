@@ -20,7 +20,7 @@ typedef struct Group {
 }group;
 
 typedef struct GroupList {
-    group group[100];
+    group *group[100];
 }groups;
 
 groups groupList;

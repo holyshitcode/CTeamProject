@@ -5,6 +5,7 @@
 #include "boardGui.h"
 #include "user.h"
 #include "list.h"
+#include "message.h"
 
 
 #define MAX_LEN 30

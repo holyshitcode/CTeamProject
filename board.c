@@ -65,9 +65,7 @@ void loadBoard(FILE *fp) {
                &board->likeCount,
                board->comments) == 5) {
         insertBoard(board);
-        printf("Board Loaded.\n");
                } else {
-                   fprintf(stderr, "Failed to read board data\n");
                    free(board->contents);
                    free(board->comments);
                    free(board);

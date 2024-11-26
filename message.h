@@ -13,5 +13,6 @@ void deleteMessage(message *message);
 void printMessage(const char *username);
 message *searchMessage(const char *username);
 void checkMessage(const char *toUsername);
-
+void saveMessagesToFile(FILE *fp);
+void loadMessagesFromFile(FILE *fp);
 #endif

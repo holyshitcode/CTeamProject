@@ -137,15 +137,141 @@ void displayUserInfo(WINDOW *win, const char *username, const char *groupName) {
     wrefresh(win);
 }
 char *isGroup(char *username) {
-    for(register int i =0; i < 100; i++) {
-        for(register int j =0; j<5; j++) {
-            if(strcmp(groupList.group[i].users[j]->nickname,username)==0) {
-                return groupList.group[i].groupName;
+    if (username == NULL) {
+        return NULL;
+    }
+
+    for (int i = 0; i < 100; i++) {
+        if (groupList.group[i]==NULL) {
+            continue; // 그룹이 NULL인 경우 건너뜀
+        }
+
+        for (int j = 0; j < 5; j++) {
+            if (groupList.group[i]->users[j] == NULL) {
+                continue; // 사용자가 NULL인 경우 건너뜀
             }
 
+            if (strcmp(groupList.group[i]->users[j]->nickname, username) == 0) {
+                return groupList.group[i]->groupName;
+            }
         }
     }
-    return NULL;
+
+    return NULL; // 해당 사용자가 속한 그룹이 없으면 NULL 반환
+}
+void sendMessage(WINDOW *win) {
+    char toUsername[MAX_LEN], contents[256];
+    echo();
+
+    mvwprintw(win, 2, 2, "To Username: ");
+    wgetstr(win, toUsername);
+
+    mvwprintw(win, 3, 2, "Message: ");
+    wgetstr(win, contents);
+    noecho();
+
+    message *newMsg = initMessage(loginUserName, toUsername, contents);
+    if (newMsg != NULL) {
+        insertMessage(newMsg);
+        FILE *messageFp =fopen("message.txt","a");
+        saveMessagesToFile(messageFp);
+        fclose(messageFp);
+        mvwprintw(win, 5, 2, "Message sent successfully!");
+    } else {
+        mvwprintw(win, 5, 2, "Failed to send message.");
+    }
+
+    wrefresh(win);
+    wgetch(win);
+}
+void viewMessages(WINDOW *win) {
+    wclear(win);
+    box(win, 0, 0);
+
+    int y = 2;
+    int messageCount = 0;
+
+    FILE *messageFp = fopen("message.txt", "r");
+    if (messageFp != NULL) {
+        loadMessagesFromFile(messageFp);
+        fclose(messageFp);
+    }
+
+    while (true) {
+        message *msg = searchMessage(loginUserName);
+        if (msg == NULL) {
+            break;
+        }
+
+        mvwprintw(win, y++, 2, "From: %s", msg->username);
+        mvwprintw(win, y++, 2, "Message: %s", msg->contents);
+        mvwprintw(win, y++, 2, "----");
+        messageCount++;
+    }
+
+    if (messageCount == 0) {
+        mvwprintw(win, 2, 2, "No messages to display.");
+    } else {
+        FILE *messageSave = fopen("message.txt", "w");
+        if (messageSave != NULL) {
+            saveMessagesToFile(messageSave);
+            fclose(messageSave);
+        }
+        mvwprintw(win, y, 2, "All messages displayed. Press any key to go back.");
+    }
+
+    wrefresh(win);
+    wgetch(win);
+}
+
+void handleMessageMenu(WINDOW *win) {
+    char *options[] = {
+        "Send Message",
+        "View Messages",
+        "Back"
+    };
+
+    int selected = 0;
+    int ch;
+
+    while (1) {
+        // 메뉴 표시
+        wclear(win);
+        box(win, 0, 0);
+        mvwprintw(win, 1, 2, "Message Menu:");
+
+        for (int i = 0; i < 3; i++) {
+            if (i == selected) {
+                wattron(win, A_REVERSE); // 선택된 항목 강조
+                mvwprintw(win, 3 + i, 2, "%s", options[i]);
+                wattroff(win, A_REVERSE);
+            } else {
+                mvwprintw(win, 3 + i, 2, "%s", options[i]);
+            }
+        }
+
+        wrefresh(win);
+
+        ch = wgetch(win); // 사용자 입력 대기
+
+        // 메뉴 선택
+        if (ch == 'w' || ch == 'W') {
+            selected = (selected == 0) ? 2 : selected - 1;
+        } else if (ch == 's' || ch == 'S') {
+            selected = (selected == 2) ? 0 : selected + 1;
+        } else if (ch == 10) { // Enter 키
+            if (selected == 0) {
+                // Send Message
+                sendMessage(win);
+            } else if (selected == 1) {
+                // View Messages
+                viewMessages(win);
+            } else if (selected == 2) {
+                // Back
+                return;
+            }
+        }
+    }
 }
 
 void handleDashboard(WINDOW *win) {
@@ -167,9 +293,11 @@ void handleDashboard(WINDOW *win) {
 
     char *username= loginUserName;
 
-
-    char *groupName = isGroup(username);
-    displayUserInfo(leftWin, username, groupName);
+    char *groupname = isGroup(username);
+    if (groupname == NULL) {
+        groupname = "empty";
+    }
+    displayUserInfo(leftWin, username, groupname);
 
     char *menu[] = {
         "Group",
@@ -250,6 +378,8 @@ void handleDashboard(WINDOW *win) {
                     fclose(fp); // 파일 닫기
                     endwin();
                     return;
+                }else if(selected == 2) {
+                    handleMessageMenu(rightWin);
                 }
 
                 wrefresh(rightWin);
