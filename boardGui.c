@@ -123,12 +123,10 @@ void addNewPost(WINDOW *win, int width, FILE *fp) {
 // 게시판 데이터 로드 함수 (파일에서 메모리로)
 void loadBoardData(FILE *fp) {
     if (fp == NULL) {
-        printf("Failed to open board file.\n");
         return;
     }
 
     loadAllBoards(fp); // 파일 데이터를 링크드 리스트에 로드
-    printf("Board data loaded successfully.\n");
 }
 
 void handleGroupMenu(WINDOW *win);

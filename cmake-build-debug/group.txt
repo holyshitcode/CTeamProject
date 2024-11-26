@@ -9,3 +9,8 @@ aa
 aa bb cc
 bb cc dd
 END_GROUP
+test2
+a
+1
+a b c
+END_GROUP
