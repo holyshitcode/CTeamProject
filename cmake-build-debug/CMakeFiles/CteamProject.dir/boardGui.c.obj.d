@@ -1,4 +1,4 @@
-CMakeFiles/CteamProject.dir/main.c.obj: C:\gitMain\main.c \
+CMakeFiles/CteamProject.dir/boardGui.c.obj: C:\gitMain\boardGui.c \
  C:/gitMain/PDCurses/curses.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/msys64/mingw64/include/stdarg.h \
@@ -15,7 +15,9 @@ CMakeFiles/CteamProject.dir/main.c.obj: C:\gitMain\main.c \
  C:/msys64/mingw64/include/swprintf.inl \
  C:/msys64/mingw64/include/sec_api/stdio_s.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h \
- C:\gitMain\boardGui.h C:\gitMain\loginGui.h C:\gitMain\user.h \
+ C:/msys64/mingw64/include/string.h \
+ C:/msys64/mingw64/include/sec_api/string_s.h C:\gitMain\boardGui.h \
+ C:\gitMain\loginGui.h C:\gitMain\list.h C:\gitMain\user.h \
  C:/msys64/mingw64/include/stdlib.h \
  C:/msys64/mingw64/include/corecrt_wstdlib.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h \
@@ -24,6 +26,5 @@ CMakeFiles/CteamProject.dir/main.c.obj: C:\gitMain\main.c \
  C:/msys64/mingw64/include/sec_api/stdlib_s.h \
  C:/msys64/mingw64/include/malloc.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h \
- C:/msys64/mingw64/include/errno.h C:/msys64/mingw64/include/string.h \
- C:/msys64/mingw64/include/sec_api/string_s.h C:\gitMain\board.h \
- C:\gitMain\list.h C:\gitMain\message.h
+ C:/msys64/mingw64/include/errno.h C:\gitMain\board.h \
+ C:\gitMain\message.h

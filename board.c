@@ -41,19 +41,45 @@ void saveBoard(Board *board,FILE *fp) {
 }
 void loadBoard(FILE *fp) {
     Board *board = malloc(sizeof(Board));
-    if (board != NULL) {
-        fscanf(fp, "%s %s %d %d %s\n",board->writer,board->contents,&board->boardHit,&board->likeCount,board->comments);
-        printf("Board Loaded.");
+    if (board == NULL) {
+        fprintf(stderr, "Memory allocation failed for board\n");
+        return;
     }
-    free(board);
-}
-void loadAllBoards(FILE *fp) {
-    Board *board = malloc(sizeof(Board));
-    if (board != NULL) {
-        while(fp != NULL && !feof(fp)) {
-            loadBoard(fp);
-        }
+
+    // 메모리 할당
+    board->contents = malloc(256); // 가정: 최대 256자
+    board->comments = malloc(256); // 가정: 최대 256자
+    if (board->contents == NULL || board->comments == NULL) {
+        fprintf(stderr, "Memory allocation failed for board contents/comments\n");
+        free(board->contents);
+        free(board->comments);
         free(board);
+        return;
+    }
+
+    // 데이터 읽기
+    if (fscanf(fp, "%19s %255s %d %d %255s",
+               board->writer,
+               board->contents,
+               &board->boardHit,
+               &board->likeCount,
+               board->comments) == 5) {
+        insertBoard(board);
+               } else {
+                   free(board->contents);
+                   free(board->comments);
+                   free(board);
+               }
+}
+
+void loadAllBoards(FILE *fp) {
+    if (fp == NULL) {
+        fprintf(stderr, "File pointer is NULL\n");
+        return;
+    }
+
+    while (!feof(fp)) {
+        loadBoard(fp);
     }
 }
 

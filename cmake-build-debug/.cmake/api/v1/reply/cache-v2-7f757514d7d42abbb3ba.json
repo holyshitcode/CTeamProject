@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/git/cmake-build-debug"
+			"value" : "c:/gitMain/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -427,7 +427,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/git/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/gitMain/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -499,7 +499,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/git"
+			"value" : "C:/gitMain"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1251,7 +1251,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/git/cmake-build-debug"
+			"value" : "C:/gitMain/cmake-build-debug"
 		},
 		{
 			"name" : "CteamProject_IS_TOP_LEVEL",
@@ -1275,7 +1275,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/git"
+			"value" : "C:/gitMain"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_CURL",

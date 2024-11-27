@@ -20,14 +20,14 @@ typedef struct Group {
 }group;
 
 typedef struct GroupList {
-    group group[100];
+    group *group[100];
 }groups;
 
-groups groupList;
+extern groups groupList;
 
 
 char* findPwd(char* name, char* id);
-void userRegister(FILE *fp);
+int userRegister(FILE *fp,char* nickname, char* id, char* pwd);
 UserInfo *findUser(const char *name);
 void loadMember(FILE *fp);
 void loadAllMembers(FILE *fp) ;
@@ -36,6 +36,6 @@ group *findGroup(const char *groupName) ;
 void joinGroup(const char *groupName, const char *username) ;
 void saveGroup(FILE *fp, const group *group) ;
 void loadGroup(FILE *fp) ;
-
-
+int resetPwd(const char *fileName, const char *name, const char *id, const char *newPwd);
+void showGroupMembers(const char *groupName);
 #endif

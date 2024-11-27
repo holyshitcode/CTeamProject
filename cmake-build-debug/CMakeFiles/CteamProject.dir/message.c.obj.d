@@ -1,4 +1,4 @@
-CMakeFiles/CteamProject.dir/message.c.obj: C:\git\message.c \
+CMakeFiles/CteamProject.dir/message.c.obj: C:\gitMain\message.c \
  C:/msys64/mingw64/include/stdio.h \
  C:/msys64/mingw64/include/corecrt_stdio_config.h \
  C:/msys64/mingw64/include/corecrt.h C:/msys64/mingw64/include/_mingw.h \
@@ -18,6 +18,6 @@ CMakeFiles/CteamProject.dir/message.c.obj: C:\git\message.c \
  C:/msys64/mingw64/include/malloc.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h \
  C:/msys64/mingw64/include/errno.h C:/msys64/mingw64/include/string.h \
- C:/msys64/mingw64/include/sec_api/string_s.h C:\git\message.h \
+ C:/msys64/mingw64/include/sec_api/string_s.h C:\gitMain\message.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h \
- C:\git\list.h
+ C:\gitMain\list.h

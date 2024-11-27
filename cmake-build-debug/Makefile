@@ -56,10 +56,10 @@ RM = C:\msys64\mingw64\bin\cmake.exe -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\git
+CMAKE_SOURCE_DIR = C:\gitMain
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\git\cmake-build-debug
+CMAKE_BINARY_DIR = C:\gitMain\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -86,9 +86,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\git\cmake-build-debug\CMakeFiles C:\git\cmake-build-debug\\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\gitMain\cmake-build-debug\CMakeFiles C:\gitMain\cmake-build-debug\\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\git\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\gitMain\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -152,29 +152,29 @@ board.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/board.c.s
 .PHONY : board.c.s
 
-handle_dashboard.obj: handle_dashboard.c.obj
-.PHONY : handle_dashboard.obj
+boardGui.obj: boardGui.c.obj
+.PHONY : boardGui.obj
 
 # target to build an object file
-handle_dashboard.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/handle_dashboard.c.obj
-.PHONY : handle_dashboard.c.obj
+boardGui.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/boardGui.c.obj
+.PHONY : boardGui.c.obj
 
-handle_dashboard.i: handle_dashboard.c.i
-.PHONY : handle_dashboard.i
+boardGui.i: boardGui.c.i
+.PHONY : boardGui.i
 
 # target to preprocess a source file
-handle_dashboard.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/handle_dashboard.c.i
-.PHONY : handle_dashboard.c.i
+boardGui.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/boardGui.c.i
+.PHONY : boardGui.c.i
 
-handle_dashboard.s: handle_dashboard.c.s
-.PHONY : handle_dashboard.s
+boardGui.s: boardGui.c.s
+.PHONY : boardGui.s
 
 # target to generate assembly for a file
-handle_dashboard.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/handle_dashboard.c.s
-.PHONY : handle_dashboard.c.s
+boardGui.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/boardGui.c.s
+.PHONY : boardGui.c.s
 
 list.obj: list.c.obj
 .PHONY : list.obj
@@ -200,29 +200,29 @@ list.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/list.c.s
 .PHONY : list.c.s
 
-login_register.obj: login_register.c.obj
-.PHONY : login_register.obj
+loginGui.obj: loginGui.c.obj
+.PHONY : loginGui.obj
 
 # target to build an object file
-login_register.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/login_register.c.obj
-.PHONY : login_register.c.obj
+loginGui.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/loginGui.c.obj
+.PHONY : loginGui.c.obj
 
-login_register.i: login_register.c.i
-.PHONY : login_register.i
+loginGui.i: loginGui.c.i
+.PHONY : loginGui.i
 
 # target to preprocess a source file
-login_register.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/login_register.c.i
-.PHONY : login_register.c.i
+loginGui.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/loginGui.c.i
+.PHONY : loginGui.c.i
 
-login_register.s: login_register.c.s
-.PHONY : login_register.s
+loginGui.s: loginGui.c.s
+.PHONY : loginGui.s
 
 # target to generate assembly for a file
-login_register.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/login_register.c.s
-.PHONY : login_register.c.s
+loginGui.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\CteamProject.dir\build.make CMakeFiles/CteamProject.dir/loginGui.c.s
+.PHONY : loginGui.c.s
 
 main.obj: main.c.obj
 .PHONY : main.obj
@@ -308,15 +308,15 @@ help:
 	@echo ... board.obj
 	@echo ... board.i
 	@echo ... board.s
-	@echo ... handle_dashboard.obj
-	@echo ... handle_dashboard.i
-	@echo ... handle_dashboard.s
+	@echo ... boardGui.obj
+	@echo ... boardGui.i
+	@echo ... boardGui.s
 	@echo ... list.obj
 	@echo ... list.i
 	@echo ... list.s
-	@echo ... login_register.obj
-	@echo ... login_register.i
-	@echo ... login_register.s
+	@echo ... loginGui.obj
+	@echo ... loginGui.i
+	@echo ... loginGui.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

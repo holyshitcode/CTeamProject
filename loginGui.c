@@ -1,19 +1,19 @@
-#include <ncurses.h>
+#include <curses.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "handle_dashboard.h"
+#include "boardGui.h"
+#include "user.h"
+#include "list.h"
+#include "message.h"
+
 
 #define MAX_LEN 30
 
 // 사용자 정보 구조체
-typedef struct UserInfo {
-    char id[MAX_LEN];
-    char passwd[MAX_LEN];
-} UserInfo;
 
-int userlogin(const char *id, const char *passwd);
-int userregister(char *id, char *passwd);
+
+
 void drawLoginButton(WINDOW *win, int focus);
 void drawRegisterButton(WINDOW *win, int focus);
 void drawLoginWindow(WINDOW *win, int focus, const char *msg, const char *id, const char *passwd);
@@ -21,21 +21,7 @@ void drawRegisterWindow(WINDOW *win, int focus, const char *msg, const char *id,
 void handleLogin(WINDOW *win);
 void handleRegister(WINDOW *win);
 
-// 간단한 로그인 함수
-int userlogin(const char *id, const char *passwd) {
-    if (strcmp(id, "admin") == 0 && strcmp(passwd, "1234") == 0) {
-        return 1; // 로그인 성공
-    }
-    return 0; // 로그인 실패
-}
 
-// 간단한 회원가입 함수
-int userregister(char *id, char *passwd) {
-    if (strcmp(id, "admin") == 0) {
-        return 0; // 이미 존재하는 아이디
-    }
-    return 1; // 회원가입 성공
-}
 
 void drawButtonsLogin(WINDOW *win, int focus) {
     int buttonStartY = 9;
@@ -180,57 +166,45 @@ void handleLogin(WINDOW *win) {
     char passwd[MAX_LEN] = "";
     char message[100] = "Please enter your ID and Password.";
 
-    // 로그인 창 크기 설정
     int loginHeight = 14, loginWidth = 40;
     int loginStartY = 5, loginStartX = 40;
     WINDOW *loginWin = newwin(loginHeight, loginWidth, loginStartY, loginStartX);
 
-    // 로그인 창을 그립니다.
+    if (loginWin == NULL) {
+        fprintf(stderr, "Error: Unable to create login window.\n");
+        return;
+    }
+
     drawLoginWindow(loginWin, focus, message, id, passwd);
 
-    // 포커스 이동과 입력을 처리하는 루프
     while (1) {
         int ch = wgetch(loginWin); // 키 입력 받기
 
         if (ch == 'w' || ch == 'W') {
-            focus = (focus == 3) ? 2 : (focus == 2) ? 1 : (focus == 1) ? 0 : focus;
+            focus = (focus - 1 + 4) % 4; // 포커스 위로 이동
         } else if (ch == 's' || ch == 'S') {
-            focus = (focus == 0) ? 1 : (focus == 1) ? 2 : (focus == 2) ? 3 : focus;
-        } else if (ch == 10) { // Enter 키를 누르면
+            focus = (focus + 1) % 4; // 포커스 아래로 이동
+        } else if (ch == 10) { // Enter 키
             if (focus == 0) {
-                // ID 입력 받기
-                wattroff(loginWin, A_REVERSE);
-                mvwprintw(loginWin, 3, 3, "ID:");
-                mvwprintw(loginWin, 3, 6, "                ");
-                wrefresh(loginWin);
-                echo();
                 mvwgetnstr(loginWin, 3, 6, id, sizeof(id) - 1);
-                noecho();
+                id[sizeof(id) - 1] = '\0';
             } else if (focus == 1) {
-                // Password 입력 받기
-                wattroff(loginWin, A_REVERSE);
-                mvwprintw(loginWin, 5, 3, "Password:");
-                mvwprintw(loginWin, 5, 12, "                ");
-                wrefresh(loginWin);
-                echo();
                 mvwgetnstr(loginWin, 5, 12, passwd, sizeof(passwd) - 1);
-                noecho();
+                passwd[sizeof(passwd) - 1] = '\0';
             } else if (focus == 2) {
-                // 로그인 버튼을 클릭하면 로그인 시도
-                if (userlogin(id, passwd)) {
-                    strcpy(message, "        Login successful!");
+                if (userLogin(id, passwd)) {
+                    strcpy(message, "Login successful!");
                     clear();
                     refresh();
-                    handleDashboard(win); // 대시보드 화면으로 이동
+                    handleDashboard(win);
                     return;
                 } else {
-                    strcpy(message, "           Login failed!");
+                    strcpy(message, "Login failed!");
                 }
             } else if (focus == 3) {
-                // 회원가입 버튼 클릭 시 회원가입 창으로 이동
-                clear();  // 화면을 지우고
-                refresh(); // 화면을 새로 고침
-                handleRegister(win); // 회원가입 창으로 이동
+                clear();
+                refresh();
+                handleRegister(win);
                 return;
             }
         }
@@ -286,8 +260,11 @@ void handleRegister(WINDOW *win) {
                 mvwgetnstr(registerWin, 7, 12, passwd, sizeof(passwd) - 1);
                 noecho();
             } else if (registerFocus == 3) {
+                FILE *fp = fopen("userInfo.txt","a+");
                 // Register 버튼 처리
-                if (userregister(id, passwd)) {
+                if (1) {
+                    userRegister(fp,nickname,id, passwd);
+                    fclose(fp);
                     strcpy(registerMessage, "Registration successful!");
                     clear();
                     refresh();

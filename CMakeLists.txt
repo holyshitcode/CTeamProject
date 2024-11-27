@@ -3,26 +3,22 @@ project(CteamProject C)
 
 set(CMAKE_C_STANDARD 11)
 
-# libcurl 찾기
-find_package(CURL REQUIRED)
-
 # 소스 파일 추가 및 실행 파일 정의
-add_executable(CteamProject main.c list.c board.c
+add_executable(CteamProject
+        main.c
+        list.c
+        board.c
         message.h
         message.c
         user.h
         user.c
-        login_register.c
-        login_register.h
-        handle_dashboard.c
-        handle_dashboard.h)
+        boardGui.c
+        boardGui.h
+        loginGui.c
+        loginGui.h
+)
 
-# libcurl 링크
-target_link_libraries(CteamProject CURL::libcurl)
+include_directories(${CMAKE_SOURCE_DIR}/PDCurses)
 
-# gui 부분
-find_package(Curses REQUIRED)
-include_directories("C:/msys64/mingw64/include/ncursesw/")
-link_directories("C:/msys64/mingw64/lib")
-
-target_link_libraries(CteamProject ncursesw)
+target_link_libraries(CteamProject ${CMAKE_SOURCE_DIR}/PDCurses/wincon/pdcurses.a
+        kernel32 user32 gdi32 winspool shell32 ole32 oleaut32 uuid comdlg32 advapi32)
