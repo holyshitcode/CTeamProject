@@ -145,8 +145,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/gitMain/cmake-build-debug",
-		"source" : "C:/gitMain"
+		"build" : "C:/git/cmake-build-debug",
+		"source" : "C:/git"
 	},
 	"version" : 
 	{

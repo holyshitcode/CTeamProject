@@ -15,15 +15,4 @@ CMakeFiles/CteamProject.dir/main.c.obj: C:\git\main.c \
  C:/msys64/mingw64/include/swprintf.inl \
  C:/msys64/mingw64/include/sec_api/stdio_s.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h \
- C:\git\board.h C:\git\loginGui.h C:\git\user.h \
- C:/msys64/mingw64/include/stdlib.h \
- C:/msys64/mingw64/include/corecrt_wstdlib.h \
- C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h \
- C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/syslimits.h \
- C:/msys64/mingw64/include/limits.h \
- C:/msys64/mingw64/include/sec_api/stdlib_s.h \
- C:/msys64/mingw64/include/malloc.h \
- C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h \
- C:/msys64/mingw64/include/errno.h C:/msys64/mingw64/include/string.h \
- C:/msys64/mingw64/include/sec_api/string_s.h C:\git\list.h \
- C:\git\message.h
+ C:\git\board.h C:\git\loginGui.h C:\git\user.h C:\git\list.h

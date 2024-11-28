@@ -5,7 +5,7 @@ C:\msys64\mingw64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=C:/m
 -- Check for working C compiler: C:/msys64/mingw64/bin/gcc.exe - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
--- Configuring done (1.4s)
+-- Configuring done (1.3s)
 -- Generating done (0.0s)
 CMake Warning:
   Manually-specified variables were not used by the project:
