@@ -2,12 +2,8 @@
 #define USER_H
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include "board.h"
 #include "list.h"
-#include "message.h"
+
 #define GROUP_MAX 5
 
 

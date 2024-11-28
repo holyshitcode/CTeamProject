@@ -71,7 +71,7 @@ message *searchMessage(const char *username) {
     return NULL;
 }
 
-void saveMessagesToFile(FILE *fp) {// 파일을 쓰기 모드로 엽니다.
+void saveMessagesToFile(FILE *fp) {
     if (fp == NULL) {
         fprintf(stderr, "Failed to open file for writing");
         return;
@@ -82,10 +82,10 @@ void saveMessagesToFile(FILE *fp) {// 파일을 쓰기 모드로 엽니다.
         if (temp->type == MESSAGE) {
             message *msg = (message *)temp->data;
             fprintf(fp, "%s,%s,%s,%d\n",
-                    msg->username,       // 발신자
-                    msg->toUsername,    // 수신자
-                    msg->contents,      // 메시지 내용
-                    msg->delivered);    // 전달 상태 (0 또는 1)
+                    msg->username,
+                    msg->toUsername,
+                    msg->contents,
+                    msg->delivered);
         }
         temp = temp->next;
     }
@@ -108,8 +108,8 @@ void loadMessagesFromFile(FILE *fp) {
     while (fscanf(fp, "%49[^,],%49[^,],%255[^,],%d\n",
                   username, toUsername, contents, &delivered) == 4) {
         message *msg = initMessage(username, toUsername, contents);
-        msg->delivered = delivered; // 전달 상태를 복원
-        insertMessage(msg);         // 메시지를 리스트에 추가
+        msg->delivered = delivered;
+        insertMessage(msg);
                   }
 
     fclose(fp);

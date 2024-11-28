@@ -7,7 +7,7 @@
 #include "message.h"
 
 
-// 전역 변수 정의
+
 node *head = NULL;
 node *tail = NULL;
 char loginUserName[21];
@@ -33,9 +33,9 @@ void insertData(void *data, dataType type) {
 }
 
 void showData(dataType type) {
-    node *temp = head; // 리스트의 시작점
+    node *temp = head;
     while (temp != NULL) {
-        if (temp->data != NULL && temp->type == type) { // 데이터 타입 비교
+        if (temp->data != NULL && temp->type == type) {
             switch (type) {
                 case STRING:
                     printf("String Data: %s\n", (char *)temp->data);
@@ -65,7 +65,7 @@ void showData(dataType type) {
                 break;
             }
         }
-        temp = temp->next; // 다음 노드로 이동
+        temp = temp->next;
     }
 }
 
@@ -200,7 +200,7 @@ node *searchData(void *data, dataType type) {
         temp = temp->next;
     }
 
-    return NULL; // 데이터가 리스트에 없으면 NULL 반환
+    return NULL;
 }
 
 

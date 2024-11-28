@@ -3,7 +3,7 @@
 
 #include <curses.h>
 
-// handleDashboard 함수 선언
+
 void handleDashboard(WINDOW *win);
 void loadBoardData(FILE *fp);
 void addNewPost(WINDOW *win, int width, FILE *fp);

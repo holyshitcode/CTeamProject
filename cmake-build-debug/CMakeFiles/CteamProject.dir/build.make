@@ -52,10 +52,10 @@ RM = C:\msys64\mingw64\bin\cmake.exe -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\gitMain
+CMAKE_SOURCE_DIR = C:\git
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\gitMain\cmake-build-debug
+CMAKE_BINARY_DIR = C:\git\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/CteamProject.dir/depend.make
@@ -73,108 +73,108 @@ CMakeFiles/CteamProject.dir/codegen:
 
 CMakeFiles/CteamProject.dir/main.c.obj: CMakeFiles/CteamProject.dir/flags.make
 CMakeFiles/CteamProject.dir/main.c.obj: CMakeFiles/CteamProject.dir/includes_C.rsp
-CMakeFiles/CteamProject.dir/main.c.obj: C:/gitMain/main.c
+CMakeFiles/CteamProject.dir/main.c.obj: C:/git/main.c
 CMakeFiles/CteamProject.dir/main.c.obj: CMakeFiles/CteamProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\gitMain\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/CteamProject.dir/main.c.obj"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/main.c.obj -MF CMakeFiles\CteamProject.dir\main.c.obj.d -o CMakeFiles\CteamProject.dir\main.c.obj -c C:\gitMain\main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\git\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/CteamProject.dir/main.c.obj"
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/main.c.obj -MF CMakeFiles\CteamProject.dir\main.c.obj.d -o CMakeFiles\CteamProject.dir\main.c.obj -c C:\git\main.c
 
 CMakeFiles/CteamProject.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CteamProject.dir/main.c.i"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\gitMain\main.c > CMakeFiles\CteamProject.dir\main.c.i
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\git\main.c > CMakeFiles\CteamProject.dir\main.c.i
 
 CMakeFiles/CteamProject.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CteamProject.dir/main.c.s"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\gitMain\main.c -o CMakeFiles\CteamProject.dir\main.c.s
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\git\main.c -o CMakeFiles\CteamProject.dir\main.c.s
 
 CMakeFiles/CteamProject.dir/list.c.obj: CMakeFiles/CteamProject.dir/flags.make
 CMakeFiles/CteamProject.dir/list.c.obj: CMakeFiles/CteamProject.dir/includes_C.rsp
-CMakeFiles/CteamProject.dir/list.c.obj: C:/gitMain/list.c
+CMakeFiles/CteamProject.dir/list.c.obj: C:/git/list.c
 CMakeFiles/CteamProject.dir/list.c.obj: CMakeFiles/CteamProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\gitMain\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/CteamProject.dir/list.c.obj"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/list.c.obj -MF CMakeFiles\CteamProject.dir\list.c.obj.d -o CMakeFiles\CteamProject.dir\list.c.obj -c C:\gitMain\list.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\git\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/CteamProject.dir/list.c.obj"
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/list.c.obj -MF CMakeFiles\CteamProject.dir\list.c.obj.d -o CMakeFiles\CteamProject.dir\list.c.obj -c C:\git\list.c
 
 CMakeFiles/CteamProject.dir/list.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CteamProject.dir/list.c.i"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\gitMain\list.c > CMakeFiles\CteamProject.dir\list.c.i
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\git\list.c > CMakeFiles\CteamProject.dir\list.c.i
 
 CMakeFiles/CteamProject.dir/list.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CteamProject.dir/list.c.s"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\gitMain\list.c -o CMakeFiles\CteamProject.dir\list.c.s
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\git\list.c -o CMakeFiles\CteamProject.dir\list.c.s
 
 CMakeFiles/CteamProject.dir/board.c.obj: CMakeFiles/CteamProject.dir/flags.make
 CMakeFiles/CteamProject.dir/board.c.obj: CMakeFiles/CteamProject.dir/includes_C.rsp
-CMakeFiles/CteamProject.dir/board.c.obj: C:/gitMain/board.c
+CMakeFiles/CteamProject.dir/board.c.obj: C:/git/board.c
 CMakeFiles/CteamProject.dir/board.c.obj: CMakeFiles/CteamProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\gitMain\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/CteamProject.dir/board.c.obj"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/board.c.obj -MF CMakeFiles\CteamProject.dir\board.c.obj.d -o CMakeFiles\CteamProject.dir\board.c.obj -c C:\gitMain\board.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\git\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/CteamProject.dir/board.c.obj"
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/board.c.obj -MF CMakeFiles\CteamProject.dir\board.c.obj.d -o CMakeFiles\CteamProject.dir\board.c.obj -c C:\git\board.c
 
 CMakeFiles/CteamProject.dir/board.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CteamProject.dir/board.c.i"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\gitMain\board.c > CMakeFiles\CteamProject.dir\board.c.i
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\git\board.c > CMakeFiles\CteamProject.dir\board.c.i
 
 CMakeFiles/CteamProject.dir/board.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CteamProject.dir/board.c.s"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\gitMain\board.c -o CMakeFiles\CteamProject.dir\board.c.s
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\git\board.c -o CMakeFiles\CteamProject.dir\board.c.s
 
 CMakeFiles/CteamProject.dir/message.c.obj: CMakeFiles/CteamProject.dir/flags.make
 CMakeFiles/CteamProject.dir/message.c.obj: CMakeFiles/CteamProject.dir/includes_C.rsp
-CMakeFiles/CteamProject.dir/message.c.obj: C:/gitMain/message.c
+CMakeFiles/CteamProject.dir/message.c.obj: C:/git/message.c
 CMakeFiles/CteamProject.dir/message.c.obj: CMakeFiles/CteamProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\gitMain\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/CteamProject.dir/message.c.obj"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/message.c.obj -MF CMakeFiles\CteamProject.dir\message.c.obj.d -o CMakeFiles\CteamProject.dir\message.c.obj -c C:\gitMain\message.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\git\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/CteamProject.dir/message.c.obj"
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/message.c.obj -MF CMakeFiles\CteamProject.dir\message.c.obj.d -o CMakeFiles\CteamProject.dir\message.c.obj -c C:\git\message.c
 
 CMakeFiles/CteamProject.dir/message.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CteamProject.dir/message.c.i"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\gitMain\message.c > CMakeFiles\CteamProject.dir\message.c.i
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\git\message.c > CMakeFiles\CteamProject.dir\message.c.i
 
 CMakeFiles/CteamProject.dir/message.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CteamProject.dir/message.c.s"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\gitMain\message.c -o CMakeFiles\CteamProject.dir\message.c.s
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\git\message.c -o CMakeFiles\CteamProject.dir\message.c.s
 
 CMakeFiles/CteamProject.dir/user.c.obj: CMakeFiles/CteamProject.dir/flags.make
 CMakeFiles/CteamProject.dir/user.c.obj: CMakeFiles/CteamProject.dir/includes_C.rsp
-CMakeFiles/CteamProject.dir/user.c.obj: C:/gitMain/user.c
+CMakeFiles/CteamProject.dir/user.c.obj: C:/git/user.c
 CMakeFiles/CteamProject.dir/user.c.obj: CMakeFiles/CteamProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\gitMain\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/CteamProject.dir/user.c.obj"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/user.c.obj -MF CMakeFiles\CteamProject.dir\user.c.obj.d -o CMakeFiles\CteamProject.dir\user.c.obj -c C:\gitMain\user.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\git\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/CteamProject.dir/user.c.obj"
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/user.c.obj -MF CMakeFiles\CteamProject.dir\user.c.obj.d -o CMakeFiles\CteamProject.dir\user.c.obj -c C:\git\user.c
 
 CMakeFiles/CteamProject.dir/user.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CteamProject.dir/user.c.i"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\gitMain\user.c > CMakeFiles\CteamProject.dir\user.c.i
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\git\user.c > CMakeFiles\CteamProject.dir\user.c.i
 
 CMakeFiles/CteamProject.dir/user.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CteamProject.dir/user.c.s"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\gitMain\user.c -o CMakeFiles\CteamProject.dir\user.c.s
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\git\user.c -o CMakeFiles\CteamProject.dir\user.c.s
 
 CMakeFiles/CteamProject.dir/boardGui.c.obj: CMakeFiles/CteamProject.dir/flags.make
 CMakeFiles/CteamProject.dir/boardGui.c.obj: CMakeFiles/CteamProject.dir/includes_C.rsp
-CMakeFiles/CteamProject.dir/boardGui.c.obj: C:/gitMain/boardGui.c
+CMakeFiles/CteamProject.dir/boardGui.c.obj: C:/git/boardGui.c
 CMakeFiles/CteamProject.dir/boardGui.c.obj: CMakeFiles/CteamProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\gitMain\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/CteamProject.dir/boardGui.c.obj"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/boardGui.c.obj -MF CMakeFiles\CteamProject.dir\boardGui.c.obj.d -o CMakeFiles\CteamProject.dir\boardGui.c.obj -c C:\gitMain\boardGui.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\git\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/CteamProject.dir/boardGui.c.obj"
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/boardGui.c.obj -MF CMakeFiles\CteamProject.dir\boardGui.c.obj.d -o CMakeFiles\CteamProject.dir\boardGui.c.obj -c C:\git\boardGui.c
 
 CMakeFiles/CteamProject.dir/boardGui.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CteamProject.dir/boardGui.c.i"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\gitMain\boardGui.c > CMakeFiles\CteamProject.dir\boardGui.c.i
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\git\boardGui.c > CMakeFiles\CteamProject.dir\boardGui.c.i
 
 CMakeFiles/CteamProject.dir/boardGui.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CteamProject.dir/boardGui.c.s"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\gitMain\boardGui.c -o CMakeFiles\CteamProject.dir\boardGui.c.s
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\git\boardGui.c -o CMakeFiles\CteamProject.dir\boardGui.c.s
 
 CMakeFiles/CteamProject.dir/loginGui.c.obj: CMakeFiles/CteamProject.dir/flags.make
 CMakeFiles/CteamProject.dir/loginGui.c.obj: CMakeFiles/CteamProject.dir/includes_C.rsp
-CMakeFiles/CteamProject.dir/loginGui.c.obj: C:/gitMain/loginGui.c
+CMakeFiles/CteamProject.dir/loginGui.c.obj: C:/git/loginGui.c
 CMakeFiles/CteamProject.dir/loginGui.c.obj: CMakeFiles/CteamProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\gitMain\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/CteamProject.dir/loginGui.c.obj"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/loginGui.c.obj -MF CMakeFiles\CteamProject.dir\loginGui.c.obj.d -o CMakeFiles\CteamProject.dir\loginGui.c.obj -c C:\gitMain\loginGui.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\git\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/CteamProject.dir/loginGui.c.obj"
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/CteamProject.dir/loginGui.c.obj -MF CMakeFiles\CteamProject.dir\loginGui.c.obj.d -o CMakeFiles\CteamProject.dir\loginGui.c.obj -c C:\git\loginGui.c
 
 CMakeFiles/CteamProject.dir/loginGui.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/CteamProject.dir/loginGui.c.i"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\gitMain\loginGui.c > CMakeFiles\CteamProject.dir\loginGui.c.i
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\git\loginGui.c > CMakeFiles\CteamProject.dir\loginGui.c.i
 
 CMakeFiles/CteamProject.dir/loginGui.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/CteamProject.dir/loginGui.c.s"
-	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\gitMain\loginGui.c -o CMakeFiles\CteamProject.dir\loginGui.c.s
+	C:\msys64\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\git\loginGui.c -o CMakeFiles\CteamProject.dir\loginGui.c.s
 
 # Object files for target CteamProject
 CteamProject_OBJECTS = \
@@ -197,11 +197,11 @@ CteamProject.exe: CMakeFiles/CteamProject.dir/user.c.obj
 CteamProject.exe: CMakeFiles/CteamProject.dir/boardGui.c.obj
 CteamProject.exe: CMakeFiles/CteamProject.dir/loginGui.c.obj
 CteamProject.exe: CMakeFiles/CteamProject.dir/build.make
-CteamProject.exe: C:/gitMain/PDCurses/wincon/pdcurses.a
+CteamProject.exe: C:/git/PDCurses/wincon/pdcurses.a
 CteamProject.exe: CMakeFiles/CteamProject.dir/linkLibs.rsp
 CteamProject.exe: CMakeFiles/CteamProject.dir/objects1.rsp
 CteamProject.exe: CMakeFiles/CteamProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\gitMain\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable CteamProject.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\git\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable CteamProject.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\CteamProject.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -213,6 +213,6 @@ CMakeFiles/CteamProject.dir/clean:
 .PHONY : CMakeFiles/CteamProject.dir/clean
 
 CMakeFiles/CteamProject.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\gitMain C:\gitMain C:\gitMain\cmake-build-debug C:\gitMain\cmake-build-debug C:\gitMain\cmake-build-debug\CMakeFiles\CteamProject.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\git C:\git C:\git\cmake-build-debug C:\git\cmake-build-debug C:\git\cmake-build-debug\CMakeFiles\CteamProject.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/CteamProject.dir/depend
 

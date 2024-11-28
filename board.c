@@ -13,7 +13,7 @@ Board *initBoard(const char *writer, const char *content) {
     }
     strcpy(board->writer, writer);
 
-    board->contents = malloc(strlen(content) + 1); // 메모리 할당
+    board->contents = malloc(strlen(content) + 1);
     if (board->contents == NULL) {
         free(board);
         return NULL;
@@ -46,9 +46,8 @@ void loadBoard(FILE *fp) {
         return;
     }
 
-    // 메모리 할당
-    board->contents = malloc(256); // 가정: 최대 256자
-    board->comments = malloc(256); // 가정: 최대 256자
+    board->contents = malloc(256);
+    board->comments = malloc(256);
     if (board->contents == NULL || board->comments == NULL) {
         fprintf(stderr, "Memory allocation failed for board contents/comments\n");
         free(board->contents);
@@ -57,7 +56,6 @@ void loadBoard(FILE *fp) {
         return;
     }
 
-    // 데이터 읽기
     if (fscanf(fp, "%19s %255s %d %d %255s",
                board->writer,
                board->contents,

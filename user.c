@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "board.h"
 #include "list.h"
-#include "message.h"
 #include "user.h"
 #define GROUP_MAX 5
 
@@ -93,7 +90,6 @@ void loadAllMembers(FILE *fp) {
 }
 
 group *createGroup(const char *groupName, const char *username) {
-    // 메모리 할당 및 초기화
     group *newGroup = malloc(sizeof(group));
     if (newGroup == NULL) {
         fprintf(stderr, "Memory allocation failed for group.\n");
@@ -103,7 +99,6 @@ group *createGroup(const char *groupName, const char *username) {
     newGroup->leaderName = strdup(username);
     newGroup->userCount = 0;
 
-    // 리더를 그룹의 첫 번째 사용자로 추가
     UserInfo *leader = findUser(username);
     if (leader == NULL) {
         fprintf(stderr, "Leader not found: %s\n", username);
@@ -127,7 +122,7 @@ group *findGroup(const char *groupName) {
     return NULL;
 }
 void joinGroup(const char *groupName, const char *username) {
-    group *group = findGroup(groupName); // groupName으로 그룹 찾기
+    group *group = findGroup(groupName);
     if (group == NULL) {
         printf("Group not found: %s\n", groupName);
         return;
@@ -138,26 +133,26 @@ void joinGroup(const char *groupName, const char *username) {
         return;
     }
 
-    UserInfo *user = findUser(username); // 사용자 검색
+    UserInfo *user = findUser(username);
     if (user == NULL) {
         printf("User not found: %s\n", username);
         return;
     }
 
-    group->users[group->userCount++] = user; // 사용자 추가
+    group->users[group->userCount++] = user;
     printf("User '%s' joined the group '%s'.\n", username, group->groupName);
 }
 void saveGroup(FILE *fp, const group *group) {
-    fprintf(fp, "%s\n", group->groupName);    // 그룹 이름
-    fprintf(fp, "%s\n", group->leaderName);   // 리더 이름
-    fprintf(fp, "%d\n", group->userCount);    // 사용자 수
+    fprintf(fp, "%s\n", group->groupName);
+    fprintf(fp, "%s\n", group->leaderName);
+    fprintf(fp, "%d\n", group->userCount);
     for (register int i = 0; i < group->userCount; i++) {
         fprintf(fp, "%s %s %s\n",
                 group->users[i]->nickname,
                 group->users[i]->id,
-                group->users[i]->passwd);     // 사용자 정보 저장
+                group->users[i]->passwd);
     }
-    fprintf(fp, "END_GROUP\n");               // 그룹 끝
+    fprintf(fp, "END_GROUP\n");
 }
 void loadGroup(FILE *fp) {
     char groupName[50], leaderName[50];
@@ -183,7 +178,7 @@ void loadGroup(FILE *fp) {
             newGroup->users[newGroup->userCount++] = user;
         }
 
-        // 그룹 저장
+
         int stored = 0;
         for (int i = 0; i < 100; i++) {
             if (!groupList.group[i]) {
@@ -222,22 +217,21 @@ int resetPwd(const char *fileName, const char *name, const char *id, const char 
         }
 
         fclose(fp);
-        return 1; // 성공
+        return 1;
     }
 
     printf("'%s'님의 id가 '%s'인 사용자를 찾지 못했습니다.\n", name, id);
-    return 0; // 실패
+    return 0;
 }
 
 void showGroupMembers(const char *groupName) {
     for (int i = 0; i < GROUP_MAX; i++) {
-        // 그룹 이름이 유효하고, 입력된 그룹 이름과 일치하는지 확인
         if (strlen(groupList.group[i]->groupName) > 0 && strcmp(groupList.group[i]->groupName, groupName) == 0) {
             printf("Group: %s (Leader: %s)\n", groupList.group[i]->groupName, groupList.group[i]->leaderName);
             printf("Members:\n");
             for (int j = 0; j < groupList.group[i]->userCount; j++) {
                 if (groupList.group[i]->users[j] != NULL) {
-                    printf("- %s\n", groupList.group[i]->users[j]->nickname); // 멤버 이름 출력
+                    printf("- %s\n", groupList.group[i]->users[j]->nickname);
                 }
             }
             return;

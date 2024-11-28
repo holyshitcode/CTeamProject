@@ -18,4 +18,4 @@ void loadBoard(FILE *fp);
 void loadAllBoards(FILE *fp);
 
 
-#endif // LIST_
+#endif

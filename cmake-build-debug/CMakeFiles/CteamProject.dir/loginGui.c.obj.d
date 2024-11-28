@@ -1,5 +1,5 @@
-CMakeFiles/CteamProject.dir/loginGui.c.obj: C:\gitMain\loginGui.c \
- C:/gitMain/PDCurses/curses.h \
+CMakeFiles/CteamProject.dir/loginGui.c.obj: C:\git\loginGui.c \
+ C:/git/PDCurses/curses.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/msys64/mingw64/include/stdarg.h \
  C:/msys64/mingw64/include/_mingw_stdarg.h \
@@ -24,6 +24,5 @@ CMakeFiles/CteamProject.dir/loginGui.c.obj: C:\gitMain\loginGui.c \
  C:/msys64/mingw64/include/malloc.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h \
  C:/msys64/mingw64/include/errno.h C:/msys64/mingw64/include/string.h \
- C:/msys64/mingw64/include/sec_api/string_s.h C:\gitMain\boardGui.h \
- C:\gitMain\user.h C:\gitMain\board.h C:\gitMain\list.h \
- C:\gitMain\message.h
+ C:/msys64/mingw64/include/sec_api/string_s.h C:\git\boardGui.h \
+ C:\git\user.h C:\git\list.h

@@ -1,4 +1,4 @@
-CMakeFiles/CteamProject.dir/board.c.obj: C:\gitMain\board.c \
+CMakeFiles/CteamProject.dir/board.c.obj: C:\git\board.c \
  C:/msys64/mingw64/include/stdio.h \
  C:/msys64/mingw64/include/corecrt_stdio_config.h \
  C:/msys64/mingw64/include/corecrt.h C:/msys64/mingw64/include/_mingw.h \
@@ -18,6 +18,5 @@ CMakeFiles/CteamProject.dir/board.c.obj: C:\gitMain\board.c \
  C:/msys64/mingw64/include/malloc.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h \
  C:/msys64/mingw64/include/errno.h C:/msys64/mingw64/include/string.h \
- C:/msys64/mingw64/include/sec_api/string_s.h C:\gitMain\board.h \
- C:\gitMain\list.h \
- C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h
+ C:/msys64/mingw64/include/sec_api/string_s.h C:\git\board.h \
+ C:\git\list.h
