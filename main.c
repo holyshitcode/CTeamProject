@@ -8,9 +8,6 @@ int main() {
     FILE *fp = fopen("userInfo.txt", "r");
     loadAllMembers(fp);
     fclose(fp);
-    FILE *fp4 = fopen("group.txt", "r");
-    loadGroup(fp4);
-    fclose(fp4);
     FILE *viewBoardFP = fopen("board.txt", "r");
     loadAllBoards(viewBoardFP);
     fclose(viewBoardFP);

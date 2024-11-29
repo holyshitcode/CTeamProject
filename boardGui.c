@@ -136,27 +136,44 @@ void displayUserInfo(WINDOW *win, const char *username, const char *groupName) {
 }
 char *isGroup(char *username) {
     if (username == NULL) {
-        return NULL;
+        return NULL;  
     }
 
+    
+    FILE *fp = fopen("group.txt", "r");
+    if (fp == NULL) {
+        printf("Error opening file\n");
+        return NULL;  
+    }
+
+    
+    loadGroup(fp);
+
+    
     for (int i = 0; i < 100; i++) {
-        if (groupList.group[i]==NULL) {
-            continue;
+        if (groupList.group[i] == NULL) {
+            continue;  
         }
 
-        for (int j = 0; j < 5; j++) {
+        
+        for (int j = 0; j < 5; j++) {  
             if (groupList.group[i]->users[j] == NULL) {
-                continue;
+                continue;  
             }
 
+            
             if (strcmp(groupList.group[i]->users[j]->nickname, username) == 0) {
-                return groupList.group[i]->groupName;
+                fclose(fp);  
+                return groupList.group[i]->groupName;  
             }
         }
     }
 
-    return NULL;
+    fclose(fp);  
+    return NULL;  
 }
+
+
 void sendMessage(WINDOW *win) {
     char toUsername[MAX_LEN], contents[256];
     echo();
@@ -410,19 +427,25 @@ void createNewGroup(WINDOW *win) {
     wgetstr(win, leaderName);
     noecho();
 
-    if (1) {
-        group *group =createGroup(groupName, leaderName);
+    group *group = createGroup(groupName, leaderName);
+
+    if (group != NULL) {  
         FILE *groupFp = fopen("group.txt", "a+");
-        saveGroup(groupFp,group);
-        fclose(groupFp);
-        mvwprintw(win, 13, 2, "Group '%s' created successfully.", groupName);
-    } else {
+        if (groupFp == NULL) {
+            mvwprintw(win, 13, 2, "Failed to open group file.");
+        } else {
+            saveGroup(groupFp, group);  
+            fclose(groupFp);
+            mvwprintw(win, 13, 2, "Group '%s' created successfully.", groupName);
+        }
+    } else {  
         mvwprintw(win, 13, 2, "Failed to create group '%s'.", groupName);
     }
 
     wrefresh(win);
-    wgetch(win);
+    wgetch(win);  
 }
+
 
 void joinExistingGroup(WINDOW *win) {
     char groupName[MAX_LEN], userName[MAX_LEN];
@@ -436,8 +459,7 @@ void joinExistingGroup(WINDOW *win) {
 
     group *existingGroup = findGroup(groupName);
     if (existingGroup == NULL) {
-        mvwprintw(win, 13
-            , 2, "Group '%s' not found.", groupName);
+        mvwprintw(win, 13, 2, "Group '%s' not found.", groupName);
         wrefresh(win);
         wgetch(win);
         return;
@@ -458,7 +480,7 @@ void joinExistingGroup(WINDOW *win) {
     saveGroup(groupFp2, existingGroup);
     fclose(groupFp2);
 
-    mvwprintw(win, 5, 2, "Successfully joined group '%s'.", groupName);
+    mvwprintw(win, 15, 2, "Successfully joined group '%s'.", groupName);
     wrefresh(win);
     wgetch(win);
 }
@@ -472,14 +494,33 @@ void viewGroupMembers(WINDOW *win) {
 
     wclear(win);
     wborder(win, '|', '|', '-', '-', '+', '+', '+', '+');
+
     FILE *viewGroupFp = fopen("group.txt", "r");
+    if (!viewGroupFp) {
+        mvwprintw(win, 12, 2, "Error: Could not open group file!");
+        wrefresh(win);
+        return;
+    }
+
+    
+    fprintf(stderr, "Loading groups from file...\n");
+
     loadGroup(viewGroupFp);
+
+    
+    fprintf(stderr, "Groups loaded successfully.\n");
+
     fclose(viewGroupFp);
-    showGroupMembers(groupName);
+
+    
+    showGroupMembers(win, groupName);
+
     mvwprintw(win, 13, 2, "Members of group '%s' are displayed above.", groupName);
     wrefresh(win);
+
     wgetch(win);
 }
+
 
 void handleGroupMenu(WINDOW *win) {
     char *options[] = {
@@ -533,4 +574,27 @@ void handleGroupMenu(WINDOW *win) {
             }
         }
     }
+}
+
+void showGroupMembers(WINDOW *win, const char *groupName) {
+    for (int i = 0; i < GROUP_MAX; i++) {
+        if (groupList.group[i] != NULL && strcmp(groupList.group[i]->groupName, groupName) == 0) {
+            mvwprintw(win, 2, 2, "Group: %s (Leader: %s)", groupList.group[i]->groupName, groupList.group[i]->leaderName);
+            mvwprintw(win, 3, 2, "Members:\n");
+
+            int y = 4; 
+            for (int j = 0; j < groupList.group[i]->userCount; j++) {
+                if (groupList.group[i]->users[j] != NULL) {
+                    mvwprintw(win, y++, 2, "- %s", groupList.group[i]->users[j]->nickname);
+                }
+            }
+
+            wrefresh(win);
+            return;
+        }
+    }
+
+    
+    mvwprintw(win, 2, 2, "Group '%s' not found.", groupName);
+    wrefresh(win);
 }

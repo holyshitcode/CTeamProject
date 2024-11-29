@@ -90,34 +90,49 @@ void loadAllMembers(FILE *fp) {
 }
 
 group *createGroup(const char *groupName, const char *username) {
-    group *newGroup = malloc(sizeof(group));
-    if (newGroup == NULL) {
-        fprintf(stderr, "Memory allocation failed for group.\n");
-        exit(EXIT_FAILURE);
+    if (username == NULL || strlen(username) == 0) {
+        printf("Error: Username cannot be empty.\n");
+        return NULL;
     }
-    newGroup->groupName = strdup(groupName);
-    newGroup->leaderName = strdup(username);
-    newGroup->userCount = 0;
 
     UserInfo *leader = findUser(username);
     if (leader == NULL) {
-        fprintf(stderr, "Leader not found: %s\n", username);
-        free(newGroup->groupName);
-        free(newGroup->leaderName);
-        free(newGroup);
+        printf("Error: User '%s' not found. Only registered users can create groups.\n", username);
         return NULL;
     }
+
+    group *newGroup = malloc(sizeof(group));
+    if (newGroup == NULL) {
+        fprintf(stderr, "Memory allocation failed for group.\n");
+        return NULL;
+    }
+
+    newGroup->groupName = strdup(groupName);
+    newGroup->leaderName = strdup(username);
+    newGroup->userCount = 0;
     newGroup->users[newGroup->userCount++] = leader;
 
-    printf("Group '%s' created with leader '%s'.\n", groupName, username);
-    return newGroup;
+    for (int i = 0; i < 100; i++) {
+        if (groupList.group[i] == NULL) {
+            groupList.group[i] = newGroup;
+            printf("Group '%s' created successfully with leader '%s'.\n", groupName, username);
+            return newGroup;
+        }
+    }
+
+    printf("Error: Group list is full. Cannot create group '%s'.\n", groupName);
+    free(newGroup->groupName);
+    free(newGroup->leaderName);
+    free(newGroup);
+    return NULL;
 }
+
+
 group *findGroup(const char *groupName) {
     for (int i = 0; i < 100; i++) {
-        if (groupList.group[i]->groupName != NULL &&
-            strcmp(groupList.group[i]->groupName, groupName) == 0) {
+        if (groupList.group[i] != NULL && strcmp(groupList.group[i]->groupName, groupName) == 0) {
             return groupList.group[i];
-            }
+        }
     }
     return NULL;
 }
@@ -146,7 +161,7 @@ void saveGroup(FILE *fp, const group *group) {
     fprintf(fp, "%s\n", group->groupName);
     fprintf(fp, "%s\n", group->leaderName);
     fprintf(fp, "%d\n", group->userCount);
-    for (register int i = 0; i < group->userCount; i++) {
+    for (int i = 0; i < group->userCount; i++) {
         fprintf(fp, "%s %s %s\n",
                 group->users[i]->nickname,
                 group->users[i]->id,
@@ -158,30 +173,42 @@ void loadGroup(FILE *fp) {
     char groupName[50], leaderName[50];
     int userCount;
 
+    // 파일 끝까지 반복
     while (fscanf(fp, "%s\n%s\n%d\n", groupName, leaderName, &userCount) == 3) {
         group *newGroup = malloc(sizeof(group));
         if (!newGroup) {
-            fprintf(stderr, "Memory allocation failed.\n");
+            fprintf(stderr, "Memory allocation failed for new group.\n");
             return;
         }
 
+        // 그룹 이름과 리더 이름 동적 할당
         newGroup->groupName = strdup(groupName);
         newGroup->leaderName = strdup(leaderName);
         newGroup->userCount = 0;
 
+        // 사용자 정보를 읽고 추가
         for (int i = 0; i < userCount; i++) {
             UserInfo *user = malloc(sizeof(UserInfo));
-            if (!user || fscanf(fp, "%s %s %s\n", user->nickname, user->id, user->passwd) != 3) {
-                free(user);
-                break;
+            if (!user) {
+                fprintf(stderr, "Memory allocation failed for user.\n");
+                free(newGroup);
+                return;
             }
+
+            if (fscanf(fp, "%s %s %s\n", user->nickname, user->id, user->passwd) != 3) {
+                fprintf(stderr, "Failed to read user info correctly.\n");
+                free(user);
+                free(newGroup);
+                return;
+            }
+
             newGroup->users[newGroup->userCount++] = user;
         }
 
-
+        // 그룹 리스트에 추가
         int stored = 0;
         for (int i = 0; i < 100; i++) {
-            if (!groupList.group[i]) {
+            if (groupList.group[i] == NULL) {
                 groupList.group[i] = newGroup;
                 stored = 1;
                 break;
@@ -192,10 +219,22 @@ void loadGroup(FILE *fp) {
             fprintf(stderr, "Group list is full. Cannot add more groups.\n");
             free(newGroup->groupName);
             free(newGroup->leaderName);
+            for (int i = 0; i < newGroup->userCount; i++) {
+                free(newGroup->users[i]);
+            }
             free(newGroup);
+        }
+
+        // "END_GROUP" 처리
+        char endGroup[10];
+        fscanf(fp, "%s", endGroup); // "END_GROUP" 읽기
+        if (strcmp(endGroup, "END_GROUP") != 0) {
+            fprintf(stderr, "Expected 'END_GROUP' but found '%s'.\n", endGroup);
+            return;
         }
     }
 }
+
 
 int resetPwd(const char *fileName, const char *name, const char *id, const char *newPwd) {
 
@@ -222,20 +261,4 @@ int resetPwd(const char *fileName, const char *name, const char *id, const char 
 
     printf("'%s'님의 id가 '%s'인 사용자를 찾지 못했습니다.\n", name, id);
     return 0;
-}
-
-void showGroupMembers(const char *groupName) {
-    for (int i = 0; i < GROUP_MAX; i++) {
-        if (strlen(groupList.group[i]->groupName) > 0 && strcmp(groupList.group[i]->groupName, groupName) == 0) {
-            printf("Group: %s (Leader: %s)\n", groupList.group[i]->groupName, groupList.group[i]->leaderName);
-            printf("Members:\n");
-            for (int j = 0; j < groupList.group[i]->userCount; j++) {
-                if (groupList.group[i]->users[j] != NULL) {
-                    printf("- %s\n", groupList.group[i]->users[j]->nickname);
-                }
-            }
-            return;
-        }
-    }
-    printf("Group '%s' not found.\n", groupName);
 }
