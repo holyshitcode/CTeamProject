@@ -171,9 +171,13 @@ void handleLogin(WINDOW *win) {
             focus = (focus + 1) % 4;
         } else if (ch == 10) {
             if (focus == 0) {
+                mvwprintw(loginWin, 3, 6, "                          ");
+                wrefresh(loginWin);
                 mvwgetnstr(loginWin, 3, 6, id, sizeof(id) - 1);
                 id[sizeof(id) - 1] = '\0';
             } else if (focus == 1) {
+                mvwprintw(loginWin, 5, 12, "                          ");
+                wrefresh(loginWin);
                 mvwgetnstr(loginWin, 5, 12, passwd, sizeof(passwd) - 1);
                 passwd[sizeof(passwd) - 1] = '\0';
             } else if (focus == 2) {
