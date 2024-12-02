@@ -1,6 +1,12 @@
 #ifndef BOARDGUI_H
 #define BOARDGUI_H
 
+/**
+ *  "boardGui.h"
+ *  Produced by 김 준, 김준영
+ *  Managed by 김준영
+ */
+
 #include <curses.h>
 
 

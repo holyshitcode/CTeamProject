@@ -6,8 +6,13 @@
 #include "user.h"
 #include "list.h"
 
-
 #define MAX_LEN 30
+
+/**
+ *  "loginGui.c"
+ *  Produced by 김 준, 김준영
+ *  Managed by 김준영
+ */
 
 void drawLoginButton(WINDOW *win, int focus);
 void drawRegisterButton(WINDOW *win, int focus);

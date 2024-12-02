@@ -173,7 +173,7 @@ void loadGroup(FILE *fp) {
     char groupName[50], leaderName[50];
     int userCount;
 
-    // 파일 끝까지 반복
+
     while (fscanf(fp, "%s\n%s\n%d\n", groupName, leaderName, &userCount) == 3) {
         group *newGroup = malloc(sizeof(group));
         if (!newGroup) {
@@ -181,12 +181,12 @@ void loadGroup(FILE *fp) {
             return;
         }
 
-        // 그룹 이름과 리더 이름 동적 할당
+
         newGroup->groupName = strdup(groupName);
         newGroup->leaderName = strdup(leaderName);
         newGroup->userCount = 0;
 
-        // 사용자 정보를 읽고 추가
+
         for (int i = 0; i < userCount; i++) {
             UserInfo *user = malloc(sizeof(UserInfo));
             if (!user) {
@@ -205,7 +205,7 @@ void loadGroup(FILE *fp) {
             newGroup->users[newGroup->userCount++] = user;
         }
 
-        // 그룹 리스트에 추가
+
         int stored = 0;
         for (int i = 0; i < 100; i++) {
             if (groupList.group[i] == NULL) {
@@ -225,9 +225,9 @@ void loadGroup(FILE *fp) {
             free(newGroup);
         }
 
-        // "END_GROUP" 처리
+
         char endGroup[10];
-        fscanf(fp, "%s", endGroup); // "END_GROUP" 읽기
+        fscanf(fp, "%s", endGroup);
         if (strcmp(endGroup, "END_GROUP") != 0) {
             fprintf(stderr, "Expected 'END_GROUP' but found '%s'.\n", endGroup);
             return;

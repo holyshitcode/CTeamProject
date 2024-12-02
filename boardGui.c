@@ -14,7 +14,11 @@
 #define MAX_POSTS 5
 #define MAX_MESSAGES 3
 
-
+/**
+ *  "boardGui.c"
+ *  Produced by 김 준, 김준영
+ *  Managed by 김준영
+ */
 
 
 typedef struct {

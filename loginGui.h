@@ -3,6 +3,11 @@
 #define LOGINGUI_H
 #include <curses.h>
 
+/**
+ *  "loginGui.h"
+ *  Produced by 김 준, 김준영
+ *  Managed by 김준영
+ */
 
 void drawLoginButton(WINDOW *win, int focus);
 void drawRegisterButton(WINDOW *win, int focus);

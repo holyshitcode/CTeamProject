@@ -4,6 +4,11 @@
 #include "message.h"
 #include "list.h"
 
+/**
+ *  "message.c"
+ *  Produced by 김준영
+ *  Managed by 김준영
+ */
 
 message *initMessage(const char *username, const char *toUsername, const char *contents) {
     message *newMessage = malloc(sizeof(message));

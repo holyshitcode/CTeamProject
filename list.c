@@ -6,7 +6,11 @@
 #include "board.h"
 #include "message.h"
 
-
+/**
+ *  "list.c"
+ *  Produced by 김준영
+ *  Managed by 김준영
+ */
 
 node *head = NULL;
 node *tail = NULL;

@@ -1,6 +1,12 @@
 #ifndef LIST_H
 #define LIST_H
 
+/**
+ *  "list.h"
+ *  Produced by 김준영
+ *  Managed by 김준영
+ */
+
 extern char loginUserName[21];
 
 typedef enum {

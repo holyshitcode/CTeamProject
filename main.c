@@ -3,6 +3,12 @@
 #include "loginGui.h"
 #include "user.h"
 
+/**
+ *  "main.c"
+ *  Produced by 김 준, 김준영
+ *  Managed by 김준영
+ */
+
 int main() {
     initscr();
     FILE *fp = fopen("userInfo.txt", "r");
