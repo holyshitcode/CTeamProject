@@ -5,6 +5,12 @@
 #include "user.h"
 #define GROUP_MAX 5
 
+/**
+ *  "user.c"
+ *  Produced by 김준영
+ *  Managed by 김준영
+ */
+
 groups groupList;
 
 char* findPwd(char* name, char* id) {
