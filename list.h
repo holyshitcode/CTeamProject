@@ -1,7 +1,13 @@
 #ifndef LIST_H
 #define LIST_H
-
 #include <stdbool.h>
+
+/**
+ *  "list.h"
+ *  Produced by 김준영
+ *  Managed by 김준영
+ */
+
 char *loginUserName[21];
 /**
  * 노드의 데이터타입을 구분하는 enum

@@ -6,11 +6,16 @@
 #include "user.h"
 #include "list.h"
 #include "message.h"
-
-
 #define MAX_LEN 30
 
-// 사용자 정보 구조체
+
+/**
+ *  "loginGui.c"
+ *  Produced by 김 준, 김준영
+ *  Managed by 김준영
+ */
+
+
 
 
 

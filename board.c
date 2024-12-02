@@ -5,6 +5,12 @@
 
 #include "list.h"
 
+/**
+ *  "board.c"
+ *  Produced by 유지헌
+ *  Managed by 김준영
+ */
+
 
 Board *initBoard(const char *writer, const char *content) {
     Board *board = malloc(sizeof(Board));

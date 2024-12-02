@@ -1,6 +1,12 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+/**
+ *  "board.h"
+ *  Produced by 유지헌
+ *  Managed by 김준영
+ */
+
 typedef struct Board {
     char writer[20];
     char *contents;

@@ -12,16 +12,13 @@
 #define MAX_POSTS 5
 #define MAX_MESSAGES 3
 
+/**
+ *  "boardGui.c"
+ *  Produced by 김 준, 김준영
+ *  Managed by 김준영
+ */
 
 
-
-typedef struct {
-    char sender[MAX_LEN];
-    char message[256];
-} Message;
-
-// 초기화된 데이터
-Message messages[MAX_MESSAGES] = { {"", ""}, {"", ""}, {"", ""} };
 
 
 // 중앙 정렬을 위한 함수

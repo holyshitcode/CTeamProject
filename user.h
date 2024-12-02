@@ -10,7 +10,11 @@
 #include "message.h"
 #define GROUP_MAX 5
 
-
+/**
+ *  "user.h"
+ *  Produced by 김준영
+ *  Managed by 김준영
+ */
 
 typedef struct Group {
     char *leaderName;
